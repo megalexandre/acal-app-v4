@@ -1,88 +1,53 @@
-// @nebular theming framework
-@import '@nebular/theme/styles/theming';
-// @nebular out of the box themes
-@import '@nebular/theme/styles/themes';
+@forward '@nebular/theme/styles/theming';
+@use '@nebular/theme/styles/theming' as *;
+@use '@nebular/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme((
-  layout-padding-top: 2.25rem,
 
-  menu-item-icon-margin: 0 0.5rem 0 0,
+  color-primary-100: #F3FFD6,
+  color-primary-200: #E3FFAD,
+  color-primary-300: #D0FF84,
+  color-primary-400: #BCFF66,
+  color-primary-500: #9DFF33,
+  color-primary-600: #7BDB25,
+  color-primary-700: #5CB719,
+  color-primary-800: #419310,
+  color-primary-900: #2E7A09,
+  color-success-100: #D6FCDD,
+  color-success-200: #AFFAC3,
+  color-success-300: #84F1AC,
+  color-success-400: #63E49F,
+  color-success-500: #34D38E,
+  color-success-600: #26B585,
+  color-success-700: #1A977A,
+  color-success-800: #107A6C,
+  color-success-900: #096562,
+  color-info-100: #CBF9FD,
+  color-info-200: #97EDFB,
+  color-info-300: #63D6F4,
+  color-info-400: #3CBBEA,
+  color-info-500: #0294DD,
+  color-info-600: #0173BE,
+  color-info-700: #01569F,
+  color-info-800: #003D80,
+  color-info-900: #002B6A,
+  color-warning-100: #FEFDD7,
+  color-warning-200: #FDFAB0,
+  color-warning-300: #FAF587,
+  color-warning-400: #F5EF69,
+  color-warning-500: #EFE639,
+  color-warning-600: #CDC429,
+  color-warning-700: #ACA31C,
+  color-warning-800: #8A8212,
+  color-warning-900: #726B0A,
+  color-danger-100: #FFEBD3,
+  color-danger-200: #FFD1A8,
+  color-danger-300: #FFB17C,
+  color-danger-400: #FF935C,
+  color-danger-500: #FF6026,
+  color-danger-600: #DB411B,
+  color-danger-700: #B72813,
+  color-danger-800: #93140C,
+  color-danger-900: #7A0708
 
-  card-height-tiny: 13.5rem,
-  card-height-small: 21.1875rem,
-  card-height-medium: 28.875rem,
-  card-height-large: 36.5625rem,
-  card-height-giant: 44.25rem,
-  card-margin-bottom: 1.875rem,
-  card-header-with-select-padding-top: 0.5rem,
-  card-header-with-select-padding-bottom: 0.5rem,
-
-  select-min-width: 6rem,
-
-  slide-out-background: #f7f9fc,
-  slide-out-shadow-color: 0 4px 14px 0 #8f9bb3,
-  slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3,
-), default, default);
-
-$nb-themes: nb-register-theme((
-  layout-padding-top: 2.25rem,
-
-  menu-item-icon-margin: 0 0.5rem 0 0,
-
-  card-height-tiny: 13.5rem,
-  card-height-small: 21.1875rem,
-  card-height-medium: 28.875rem,
-  card-height-large: 36.5625rem,
-  card-height-giant: 44.25rem,
-  card-margin-bottom: 1.875rem,
-  card-header-with-select-padding-top: 0.5rem,
-  card-header-with-select-padding-bottom: 0.5rem,
-
-  select-min-width: 6rem,
-
-  slide-out-background: #252547,
-  slide-out-shadow-color: 2px 0 3px #29157a,
-  slide-out-shadow-color-rtl: -2px 0 3px #29157a,
-), cosmic, cosmic);
-
-$nb-themes: nb-register-theme((
-  layout-padding-top: 2.25rem,
-
-  menu-item-icon-margin: 0 0.5rem 0 0,
-
-  card-height-tiny: 13.5rem,
-  card-height-small: 21.1875rem,
-  card-height-medium: 28.875rem,
-  card-height-large: 36.5625rem,
-  card-height-giant: 44.25rem,
-  card-margin-bottom: 1.875rem,
-  card-header-with-select-padding-top: 0.5rem,
-  card-header-with-select-padding-bottom: 0.5rem,
-
-  select-min-width: 6rem,
-
-  slide-out-background: linear-gradient(270deg, #edf1f7 0%, #e4e9f2 100%),
-  slide-out-shadow-color: 0 4px 14px 0 #8f9bb3,
-  slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3,
-), corporate, corporate);
-
-$nb-themes: nb-register-theme((
-  layout-padding-top: 2.25rem,
-
-  menu-item-icon-margin: 0 0.5rem 0 0,
-
-  card-height-tiny: 13.5rem,
-  card-height-small: 21.1875rem,
-  card-height-medium: 28.875rem,
-  card-height-large: 36.5625rem,
-  card-height-giant: 44.25rem,
-  card-margin-bottom: 1.875rem,
-  card-header-with-select-padding-top: 0.5rem,
-  card-header-with-select-padding-bottom: 0.5rem,
-
-  select-min-width: 6rem,
-
-  slide-out-background: linear-gradient(270deg, #222b45 0%, #151a30 100%),
-  slide-out-shadow-color: 0 4px 14px 0 #8f9bb3,
-  slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3,
-), dark, dark);
+), aquamarine, dark);

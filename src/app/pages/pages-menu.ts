@@ -16,7 +16,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'FEATURES',
     group: true,
   },
+
   {
+    title: 'Cadastros',
+    icon: 'file-text-outline',
+    children: [
+      {
+        title: 'Clientes',
+        link: '/pages/registration',
+      },
+    ]
+  },
+  {
+
     title: 'Layout',
     icon: 'layout-outline',
     children: [
