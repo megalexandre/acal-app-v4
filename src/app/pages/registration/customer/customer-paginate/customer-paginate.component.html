@@ -23,7 +23,7 @@
           </th>
 
           <th class="col-1 align-middle" colspan="2">
-            <button nbButton outline status="basic" fullWidth (click)="add()">
+            <button nbButton outline status="basic" fullWidth (click)="create()">
               <nb-icon icon="plus-outline"></nb-icon>
             </button>
           </th>
@@ -38,12 +38,13 @@
           </th>
 
           <th>
+
+
             <nb-form-field>
-              <input type="text" [mask]="'000.000.000-00'" nbInput placeholder="Documento" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.documentNumber">
+              <input type="text" [mask]="personType?.name === 'INDIVIDUAL' ? '000.000.000-00' : '00.000.000/0000-00'" nbInput placeholder="Documento" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.documentNumber">
 
               <button nbSuffix nbButton ghost (click)="togglePersonType()">
-                <nb-icon [icon]="filter?.personType?.name !== 'INDIVIDUAL' ? 'person-outline' : 'person-outline'" pack="eva" >
-                </nb-icon>
+                <nb-icon [icon]="personType?.name === 'INDIVIDUAL' ? 'person-outline' : 'car-outline'" pack="eva"></nb-icon>
               </button>
 
             </nb-form-field>
@@ -86,8 +87,8 @@
       <tfoot>
         <tr>
           <td colspan="4" *ngIf="page">
-              <ngx-app-table-footer [page]="page" (search)="paginate($event)">
-              </ngx-app-table-footer>
+            <ngx-app-table-footer [page]="page" (search)="paginate($event)">
+            </ngx-app-table-footer>
           </td>
         </tr>
       </tfoot>

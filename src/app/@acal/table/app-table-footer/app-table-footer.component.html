@@ -1,8 +1,49 @@
+
 <div class="d-flex justify-content-between">
 
   <ng-container *ngIf="!page.empty">
     <div class="caption">
       Pagina: {{page.number + 1}} de {{page.totalPages}}
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="page.empty">
+    <div class="caption">Nenhum registro atende aos criterios</div>
+  </ng-container>
+
+
+<ng-container *ngIf="!page.empty">
+  <div class="d-flex justify-content-center">
+    <div>
+        <button nbButton outline status="basic" fullWidth (click)="firstPage()" [disabled]="disableBackAction">
+          <nb-icon icon="arrowhead-left-outline"></nb-icon>
+        </button>
+      </div>
+
+      <div>
+        <button nbButton outline status="basic" fullWidth (click)="backPage()" [disabled]="disableBackAction">
+          <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+        </button>
+      </div>
+
+      <div>
+        <button nbButton outline status="basic" fullWidth [disabled]="true">
+          {{page.number + 1}}
+        </button>
+      </div>
+
+      <div>
+        <button nbButton outline status="basic" fullWidth (click)="forwardPage()" [disabled]="disableFowardAction">
+          <nb-icon icon="arrow-ios-forward-outline"></nb-icon>
+        </button>
+      </div>
+
+      <div>
+        <button nbButton outline status="basic" fullWidth (click)="lastPage()" [disabled]="disableFowardAction">
+          <nb-icon icon="arrowhead-right-outline"></nb-icon>
+        </button>
+      </div>
+
     </div>
   </ng-container>
 
@@ -13,43 +54,3 @@
   </ng-container>
 
 </div>
-
-
-<ng-container *ngIf="page.empty">
-  <div class="caption">Nenhum registro atende aos criterios</div>
-</ng-container>
-
-
-<div class="d-flex justify-content-center">
-  <div>
-      <button nbButton outline status="basic" fullWidth (click)="fristPage()">
-        <nb-icon icon="arrowhead-left-outline"></nb-icon>
-      </button>
-    </div>
-
-    <div>
-      <button nbButton outline status="basic" fullWidth (click)="backPage()">
-        <nb-icon icon="arrow-ios-back-outline"></nb-icon>
-      </button>
-    </div>
-
-    <div>
-      <button nbButton outline status="basic" fullWidth [disabled]="true">
-        {{page.number + 1}}
-      </button>
-    </div>
-
-    <div>
-      <button nbButton outline status="basic" fullWidth (click)="forwardPage()">
-        <nb-icon icon="arrow-ios-forward-outline"></nb-icon>
-      </button>
-    </div>
-
-    <div>
-      <button nbButton outline status="basic" fullWidth (click)="lastPage()">
-        <nb-icon icon="arrowhead-right-outline"></nb-icon>
-      </button>
-    </div>
-
-</div>
-

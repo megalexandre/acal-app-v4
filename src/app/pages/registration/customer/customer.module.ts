@@ -4,15 +4,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbButtonModule, NbCardModule, NbFormFieldModule, NbIconModule, NbInputModule, NbSpinnerModule } from '@nebular/theme';
 import { ComponentModule } from 'app/component/component.module';
 import { NgxMaskModule } from 'ngx-mask';
-import { AcalModule } from './../../../@acal/acal.module';
-import { PipeModule } from './../../../@pipe/pipe.module';
-import { CustomerAddComponent } from './customer-add/customer-add.component';
+import { CustomerCreateComponent } from './customer-create/customer-create.component';
 import { CustomerDeleteComponent } from './customer-delete/customer-delete.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
-import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerRoutingModule } from './customer-routing.module';
 import { CustomerComponent } from './customer.component';
 import { CustomerService } from './customer.service';
+import { CustomerPaginateComponent } from './customer-paginate/customer-paginate.component';
+import { AcalModule } from 'app/@acal/acal.module';
+import { PipeModule } from 'app/@pipe/pipe.module';
 
 @NgModule({
   imports: [
@@ -33,8 +33,8 @@ import { CustomerService } from './customer.service';
   ],
   declarations: [
     CustomerComponent,
-    CustomerListComponent,
-    CustomerAddComponent,
+    CustomerPaginateComponent,
+    CustomerCreateComponent,
     CustomerEditComponent,
     CustomerDeleteComponent,
   ],

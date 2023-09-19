@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Page } from '@model/page';
 
 @Component({
@@ -6,7 +6,7 @@ import { Page } from '@model/page';
   templateUrl: './app-table-footer.component.html',
   styleUrls: ['./app-table-footer.component.scss']
 })
-export class AppTableFooterComponent implements OnInit{
+export class AppTableFooterComponent implements OnInit, OnChanges {
 
   @Input()
   public page: Page<any>
@@ -17,19 +17,28 @@ export class AppTableFooterComponent implements OnInit{
   public disableBackAction: boolean = false;
   public disableFowardAction: boolean = false;
 
-  constructor() { }
-
   ngOnInit(): void {
-    this.disableBackAction = (this.page.pageable.pageNumber == 0)
-    this.disableFowardAction = (this.page.pageable.pageNumber == this.page.totalPages)
+    this.updateDisabled()
   }
 
-  fristPage(){
-    if(this.page.pageable.pageNumber ==0 ){
+  ngOnChanges(): void {
+    this.updateDisabled();
+  }
+
+  updateDisabled(){
+    this.disableBackAction = (this.page.pageable.pageNumber == 0)
+    this.disableFowardAction = (this.page.pageable.pageNumber + 1 == this.page.totalPages)
+  }
+
+  public firstPage(){
+    if(this.page.pageable.pageNumber == 0 ){
       return;
     }
-
     this.searchAction(0)
+  }
+
+  searchAction(value: number) {
+    this.search.emit(value);
   }
 
   backPage(){
@@ -55,10 +64,4 @@ export class AppTableFooterComponent implements OnInit{
 
     this.searchAction(this.page.totalPages -1)
   }
-
-
-  searchAction(value: number) {
-    this.search.emit(value);
-  }
-
 }

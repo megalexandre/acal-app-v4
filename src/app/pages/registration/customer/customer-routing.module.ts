@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CustomerAddComponent } from './customer-add/customer-add.component';
+import { CustomerCreateComponent } from './customer-create/customer-create.component';
 import { CustomerDeleteComponent } from './customer-delete/customer-delete.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
-import { CustomerListComponent } from './customer-list/customer-list.component';
+import { CustomerPaginateComponent } from './customer-paginate/customer-paginate.component';
 import { CustomerComponent } from './customer.component';
 
 const routes: Routes = [
@@ -12,12 +12,12 @@ const routes: Routes = [
     component: CustomerComponent,
     children: [
     {
-      path: 'list',
-      component: CustomerListComponent
+      path: 'paginate',
+      component: CustomerPaginateComponent
     },
     {
-      path: 'add',
-      component: CustomerAddComponent
+      path: 'create',
+      component: CustomerCreateComponent
     },
     {
       path: 'edit',
@@ -27,8 +27,8 @@ const routes: Routes = [
       path: 'delete',
       component: CustomerDeleteComponent
     },
-    { path: '', redirectTo: 'list', pathMatch: 'full' },
-    { path: '**', redirectTo: 'list' },
+    { path: '', redirectTo: 'paginate', pathMatch: 'full' },
+    { path: '**', redirectTo: 'paginate' },
     ]
   },
 

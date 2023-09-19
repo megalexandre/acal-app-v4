@@ -8,10 +8,10 @@ import { CustomerComponent } from '../customer.component';
 import { CustomerService } from '../customer.service';
 
 @Component({
-  selector: 'ngx-customer-add',
-  templateUrl: './customer-add.component.html',
+  selector: 'ngx-customer-create',
+  templateUrl: './customer-create.component.html',
 })
-export class CustomerAddComponent extends CustomerComponent implements OnInit {
+export class CustomerCreateComponent extends CustomerComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,

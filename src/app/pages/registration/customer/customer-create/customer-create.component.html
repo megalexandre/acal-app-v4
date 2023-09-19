@@ -12,7 +12,7 @@
 
             <div class="col-12">
               <label for="name" class="label">Nome:</label>
-              <input id="name" type="text" nbInput fullWidth placeholder="Nome:" formControlName="name"  [status]="getStatus('name')" [disabled]="submmited">
+              <input id="name" type="text" nbInput fullWidth placeholder="Nome:" formControlName="name"  [status]="getStatus('name')">
               <error-message [message]="'Nome é obrigatório'" [show]="(name.errors?.required && (submmited || this.form.touched))"></error-message>
             </div>
 
