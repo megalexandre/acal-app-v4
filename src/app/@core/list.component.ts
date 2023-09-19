@@ -32,7 +32,7 @@ export abstract class ListComponent{
     }
 
     this.loading = true;
-    this.service.getPage(this.prepareDataForSearch()).subscribe(
+    this.service.paginate(this.prepareDataForSearch()).subscribe(
       page => {
         this.page = page;
         this.loading = false;

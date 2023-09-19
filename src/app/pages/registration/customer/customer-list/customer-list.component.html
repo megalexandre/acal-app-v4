@@ -12,14 +12,14 @@
 
           <th class="col-9 align-middle" (click)="order('name')">
               Nome:
-              <nb-icon *ngIf="filter.sortedField === 'name' && filter.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
-              <nb-icon *ngIf="filter.sortedField === 'name' && filter.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
 
-          <th class="col-2 align-middle" (click)="order('document')">
-            Documento:
-            <nb-icon *ngIf="filter.sortedField === 'document' && filter.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
-            <nb-icon *ngIf="filter.sortedField === 'document' && filter.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+          <th class="col-2 align-middle" (click)="order('documentNumber')">
+              Documento:
+              <nb-icon *ngIf="filter.sort.field === 'documentNumber' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+              <nb-icon *ngIf="filter.sort.field === 'documentNumber' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
 
           <th class="col-1 align-middle" colspan="2">
@@ -39,12 +39,13 @@
 
           <th>
             <nb-form-field>
-              <input type="text" [mask]="filter.personType.name === 'PERSON' ? '000.000.000-00':'00.000.000/0000-00'" nbInput placeholder="Documento" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.document">
+              <input type="text" [mask]="'000.000.000-00'" nbInput placeholder="Documento" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.documentNumber">
+
               <button nbSuffix nbButton ghost (click)="togglePersonType()">
-                <nb-icon [icon]="filter.personType.name === 'PERSON' ? 'person-outline' : 'car-outline'"
-                         pack="eva" [attr.aria-label]="filter.personType.name === 'LEGAL' ? 'LEGAL' : 'PERSON'">
+                <nb-icon [icon]="filter?.personType?.name !== 'INDIVIDUAL' ? 'person-outline' : 'person-outline'" pack="eva" >
                 </nb-icon>
               </button>
+
             </nb-form-field>
           </th>
 
@@ -65,7 +66,7 @@
       <tbody >
         <tr *ngFor="let item of page?.content">
           <td class="align-middle">{{item.name }}</td>
-          <td class="align-middle">{{item.document | identification}}</td>
+          <td class="align-middle">{{item.documentNumber | identification}}</td>
 
           <td class="align-middle">
             <button nbButton outline status="warning" fullWidth (click)="edit(item.id)">

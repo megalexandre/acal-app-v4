@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Page } from '@model/page';
 import { Observable } from 'rxjs';
 
@@ -12,6 +12,10 @@ export abstract class DefaultService <
   public abstract env: String
 
   constructor(public http: HttpClient) { }
+
+  public paginate(filterPage: any): Observable<Page<ModelPage>>{
+    return this.http.post<Page<ModelPage>>(`${this.env+'/paginate'}`, filterPage);
+  }
 
   public getReport(filter: Filter){
     return this.http.post<any>(`${this.env}/report`, filter, { 'responseType': 'arraybuffer' as 'json' })

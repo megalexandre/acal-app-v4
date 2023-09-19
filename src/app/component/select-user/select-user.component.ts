@@ -34,12 +34,15 @@ export class SelectUserComponent implements OnInit{
 
 
   public order(field: string){
+
+    /*
     this.filter.sortedField = field
     if(this.filter.direction ===  'ASC') {
       this.filter.direction = 'DESC';
     } else {
       this.filter.direction = 'ASC';
     }
+    */
 
     this.search();
   }
@@ -55,8 +58,7 @@ export class SelectUserComponent implements OnInit{
   }
 
   public togglePersonType(){
-
-    this.filter.document = null;
+    this.filter.documentNumber = null;
     if(this.personType === 'LEGAL'){
       this.personType = 'PERSON'
     } else {
@@ -66,19 +68,19 @@ export class SelectUserComponent implements OnInit{
 
 
   public paginate(page: number){
-    this.filter.page = page;
+   // this.filter.page = page;
     this.search('paginate');
   }
 
   public search(action: String = 'serch') {
     if(action ==='serch'){
-      this.filter.page = 0;
+     // this.filter?.page?.number = 0;
     }
 
     this.loading = true;
     this.service.getPage(this.filter).subscribe(
       page => {
-        this.page = page;
+       //this.page = page;
         this.loading = false;
       },
     );

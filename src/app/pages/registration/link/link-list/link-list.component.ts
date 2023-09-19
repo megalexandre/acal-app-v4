@@ -58,7 +58,7 @@ export class LinkListComponent extends ListComponent implements OnInit {
 
   public togglePersonType(){
     if(this.filter.personType.name === 'LEGAL'){
-      this.filter.personType.name = 'PERSON'
+      this.filter.personType.name = 'INDIVIDUAL'
     } else {
       this.filter.personType.name = 'LEGAL'
     }

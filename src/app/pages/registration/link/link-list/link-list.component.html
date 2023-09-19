@@ -83,13 +83,13 @@
           <th>
             <nb-form-field>
               <input type="text"
-                [mask]="filter.personType.name === 'PERSON' ? '000.000.000-00':'00.000.000/0000-00'"
+                [mask]="filter.personType.name === 'INDIVIDUAL' ? '000.000.000-00':'00.000.000/0000-00'"
                 nbInput placeholder="Documento" fullWidth (keydown.enter)="search()"
                 [(ngModel)]="filter.customer.document">
 
               <button nbSuffix nbButton ghost (click)="togglePersonType()">
                 <nb-icon
-                  [icon]="filter.personType.name === 'PERSON' ? 'person-outline' : 'car-outline'"
+                  [icon]="filter.personType.name === 'INDIVIDUAL' ? 'person-outline' : 'car-outline'"
                   pack="eva" [attr.aria-label]="filter.personType.name === 'LEGAL' ? 'LEGAL' : 'PERSON'">
                 </nb-icon>
               </button>

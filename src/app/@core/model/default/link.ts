@@ -84,7 +84,7 @@ export class LinkPageFilter {
       name: null,
     },
   };
-  personType?: PersonType = {name: 'PERSON'};
+  personType?: PersonType = {name: 'INDIVIDUAL'};
 
   page: number = 0;
   pageSize: number = 10;
@@ -115,7 +115,7 @@ export class LinkPageFilter {
         name: null,
       },
     };
-    this.personType = {name: 'PERSON'};;
+    this.personType = {name: 'INDIVIDUAL'};;
 
     this.page = 0;
     this.pageSize = 10;
