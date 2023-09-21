@@ -38,7 +38,7 @@ export class CustomerComponent {
 
     this.membershipNumber.updateValueAndValidity()
     this.personType.setValue(this.personTypeValue);
-    this.document.setValue(null);
+    this.documentNumber.setValue(null);
   }
 
 
@@ -94,8 +94,8 @@ export class CustomerComponent {
     return this.form.get('phoneNumber')
   }
 
-  get document(): AbstractControl {
-    return this.form.get('document')
+  get documentNumber(): AbstractControl {
+    return this.form.get('documentNumber')
   }
 
   get membershipNumber(): AbstractControl {

@@ -8,22 +8,22 @@
         </nb-card-header>
 
         <nb-card-body>
-          <div class="row mb-3">
 
+          <div class="row mb-3">
             <div class="col-12">
               <label for="name" class="label">Nome:</label>
               <input id="name" type="text" nbInput fullWidth placeholder="Nome:" formControlName="name"  [status]="getStatus('name')">
               <error-message [message]="'Nome é obrigatório'" [show]="(name.errors?.required && (submmited || this.form.touched))"></error-message>
             </div>
 
-            <div [ngClass]="personTypeValue === 'PERSON'? 'col-xl-3 col-12':'col-xl-4 col-md-6 col-12'" >
+            <div [ngClass]="personTypeValue === 'PERSON'? 'col-xl-4 col-12':'col-md-6 col-12'" >
               <label for="name" class="label">Documento:</label>
               <nb-form-field>
                 <input id="document"
                   type="text"
-                  [status]="getStatus('document')"
+                  [status]="getStatus('documentNumber')"
                   [mask]="personTypeValue === 'PERSON' ? '000.000.000-00':'00.000.000/0000-00'"
-                  nbInput placeholder="Documento" fullWidth formControlName="document" >
+                  nbInput placeholder="Documento" fullWidth formControlName="documentNumber" >
 
                 <button nbSuffix nbButton ghost (click)="togglePersonType()" type="button">
                   <nb-icon [icon]="personTypeValue === 'PERSON' ? 'person-outline' : 'car-outline'"
@@ -31,33 +31,88 @@
                   </nb-icon>
                 </button>
               </nb-form-field>
-              <error-message [message]="'Documento é obrigatório'" [show]="(document.errors?.required && (submmited || this.form.touched))"></error-message>
-              <error-message [message]="'Esse número não é valido é obrigatório'" [show]="(document.errors?.cpfNotValid && (submmited || this.form.touched))"></error-message>
+              <error-message [message]="'Documento é obrigatório'" [show]="(documentNumber.errors?.required && (submmited || this.form.touched))"></error-message>
+              <error-message [message]="'Esse número não é valido é obrigatório'" [show]="(documentNumber.errors?.cpfNotValid && (submmited || this.form.touched))"></error-message>
 
             </div>
 
-            <div [ngClass]="personTypeValue === 'PERSON'? 'col-xl-3 col-12':'col-xl-4 col-md-6 col-12'" *ngIf="personTypeValue === 'PERSON'" >
+            <div [ngClass]="personTypeValue === 'PERSON'? 'col-xl-4 col-12':'col-xl-6 col-md-6 col-12'" *ngIf="personTypeValue === 'PERSON'" >
               <label for="socio" class="label">Número de Sócio:</label>
               <input id="membershipNumber" [status]="getStatus('membershipNumber')" mask="0*" type="text" nbInput fullWidth placeholder="Número de Sócio:" formControlName="membershipNumber">
             </div>
 
-            <div [ngClass]="personTypeValue === 'PERSON'? 'col-xl-3 col-12':'col-xl-4 col-md-6 col-12'" >
-              <label for="telefone" class="label">Telefone:</label>
-              <input id="telefone" [status]="getStatus('phoneNumber')" mask="(00) 0 0000-0000" type="text" nbInput fullWidth placeholder="Telefone:" formControlName="phoneNumber">
+              <div [ngClass]="personTypeValue === 'PERSON'? 'col-xl-4 col-12':'col-xl-6 col-12'" >
+                <label for="birthDay" class="label">Data de Nascimento:</label>
+                <ngx-input-date
+                  (setBlur)="setBirthDayTouched()"
+                  (setDate)="setDate($event)"
+                  placeholder="Data de Nascimento:" [status]="getStatus('birthDay')"></ngx-input-date>
+                <error-message [message]="'Esse data não é valida'" [show]="(birthDay.errors?.dateNotValid && (submmited || this.form.touched))"></error-message>
+              </div>
             </div>
 
-            <div [ngClass]="personTypeValue === 'PERSON'? 'col-xl-3 col-12':'col-xl-4 col-md-6 col-12'" >
-              <label for="birthDay" class="label">Data de Nascimento:</label>
-              <ngx-input-date
-                (setBlur)="setBirthDayTouched()"
-                (setDate)="setDate($event)"
-                placeholder="Data de Nascimento:" [status]="getStatus('birthDay')"></ngx-input-date>
-              <error-message [message]="'Esse data não é valida'" [show]="(birthDay.errors?.dateNotValid && (submmited || this.form.touched))"></error-message>
+            <div class="mb-3">
+
+              <div formArrayName="phoneNumbers">
+                <div *ngFor="let phoneNumber of phoneNumbers.controls; let i = index">
+                  <div [formGroupName]="i" class="phone-number">
+
+                    <div class="row mb-3">
+
+                      <div class="col-md-6">
+                        <input nbInput fullWidth formControlName="number" mask="00 0000-0000"
+                          [status]="submmited ? (form.get('phoneNumbers').get(i.toString()).get('number').valid ? 'success' : 'danger') : 'basic' "
+                          placeholder="Número de telefone"
+                         >
+
+                        <error-message [message]="'Escolha um número de telefone'"
+                          [show]="form.get('phoneNumbers').get(i.toString()).get('number').hasError('required') &&
+                          (submmited || form.get('phoneNumbers').get(i.toString()).get('number').touched)">
+                        </error-message>
+
+                      </div>
+
+                      <div class="col-md-2">
+                        <nb-checkbox status="basic"
+                        [status]="submmited ? (form.get('phoneNumbers').get(i.toString()).get('preferential').valid ? 'success' : 'danger') : 'basic' "
+                        fullWidth formControlName="preferential">Número principal</nb-checkbox>
+                      </div>
+
+                      <div class="col-md-2">
+                        <nb-checkbox status="basic"
+                        [status]="submmited ? (form.get('phoneNumbers').get(i.toString()).get('isWhatApp').valid ? 'success' : 'danger') : 'basic' "
+                        fullWidth formControlName="isWhatApp">É whatsapp?</nb-checkbox>
+                      </div>
+
+                      <div class="col-md-2">
+                        <button type="button" fullWidth nbButton (click)="removePhoneNumber(i)">Remover</button>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3" *ngIf="form.hasError('zeroPreferentialError', 'phoneNumbers') && submmited">
+                <hr/>
+                <error-message [message]="'Por favor, selecione um número preferencial'" [show]='true'></error-message>
+              </div>
+
+              <div class="mb-3" *ngIf="form.hasError('twoPreferentialError', 'phoneNumbers') && submmited">
+                <hr/>
+                <error-message [message]="'Por favor, selecione somente um número preferencial'" [show]='true'></error-message>
+              </div>
+
+              <button type="button" nbButton (click)="addPhoneNumber()">Adicionar Número de Telefone</button>
+
             </div>
 
-          </div>
+
 
         </nb-card-body>
+
+
         <nb-card-footer>
 
           <div class="d-flex justify-content-between">
@@ -69,8 +124,8 @@
               <nb-icon icon="save-outline"></nb-icon>
             </button>
           </div>
-
         </nb-card-footer>
+
       </nb-card>
 
     </div>

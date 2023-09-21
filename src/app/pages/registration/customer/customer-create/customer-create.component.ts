@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
 import DateValidator from 'app/@validator/date.validator';
 import DocumentValidator from 'app/@validator/document.validator';
 import { CustomerComponent } from '../customer.component';
 import { CustomerService } from '../customer.service';
+import { phoneNumberPreferentialValidator } from 'app/@validator/phone-number-list.validator';
 
 @Component({
   selector: 'ngx-customer-create',
@@ -30,13 +31,29 @@ export class CustomerCreateComponent extends CustomerComponent implements OnInit
   override createForm(): void {
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
-      document: [null, [Validators.required, DocumentValidator.valid() ]],
+      documentNumber: [null, [Validators.required, DocumentValidator.valid() ]],
+      personType: ["INDIVIDUAL"],
       birthDay: [null, [DateValidator.valid()]],
-      phoneNumber: [null],
-      personType: ['PERSON'],
       membershipNumber: [null, Validators.required],
+
+      phoneNumbers: this.formBuilder.array([], phoneNumberPreferentialValidator()),
     })
   }
+
+  addPhoneNumber() {
+    const newPhoneNumber = this.formBuilder.group({
+      preferential: [false],
+      number: ['', Validators.required],
+      isWhatApp: [false]
+    });
+
+    this.phoneNumbers.push(newPhoneNumber);
+  }
+
+  removePhoneNumber(index: number) {
+    this.phoneNumbers.removeAt(index);
+  }
+
 
   public override commit(): void {
     this.service.save(this.form.value).subscribe(
@@ -49,6 +66,10 @@ export class CustomerCreateComponent extends CustomerComponent implements OnInit
       }
 
     )
+  }
+
+  get phoneNumbers(): FormArray {
+    return this.form.get('phoneNumbers') as FormArray;
   }
 
 }
