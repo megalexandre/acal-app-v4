@@ -4,16 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '@model/default/customer';
 import { NbToastrService } from '@nebular/theme';
 import { DataService } from 'app/@shared/data.service';
-import { CustomerComponent } from '../customer.component';
-import { CustomerService } from './../customer.service';
+import { CustomerComponent } from '../category.component';
+import { CustomerService } from '../category.service';
 
 @Component({
-  selector: 'ngx-customer-edit',
-  templateUrl: './customer-edit.component.html',
+  selector: 'ngx-customer-delete',
+  templateUrl: './customer-delete.component.html',
 })
-export class CustomerEditComponent extends CustomerComponent implements OnInit {
+export class CustomerDeleteComponent extends CustomerComponent implements OnInit  {
 
-  public title: String = "Editar cliente";
   public customer: Customer;
   public id: string;
   public loaded: boolean = false;
@@ -38,45 +37,23 @@ export class CustomerEditComponent extends CustomerComponent implements OnInit {
     this.service.getById(this.id).subscribe(
       (customer: Customer)=> {
         this.customer = customer;
-          this.createForm();
-          this.patchFormValues(customer)
-          this.loaded = true
+        this.loaded = true
+
       }
     )
   }
 
-  override createForm(): void {
-    super.createForm();
-
-  }
-
-  patchFormValues(customer: Customer){
-    this.form.patchValue({
-      name: customer.name,
-      documentNumber: customer.documentNumber,
-      birthDay: customer.birthDay,
-      membershipNumber: customer.membershipNumber,
-    });
-
-    customer.phoneNumbers?.forEach(item =>{
-        super.addPhoneNumber(item)
-    })
-
-    this.form.addControl('id', this.formBuilder.control(customer.id));
-
-  }
-
-  public override commit(): void {
-    this.service.update(this.form.value).subscribe(
+  override commit(): void {
+    this.service.delete(this.id).subscribe(
       () => {
-        this.toastrService.success(`Sucesso`, `Registro Atualizado`)
+        this.toastrService.success(`Sucesso`, `Registro Excluido`)
         this.router.navigate(['../list'],{relativeTo: this.activatedRoute})
       },
       (response) =>{
         this.toastrService.danger(response.error.detail, `Não foi possivel realizar a ação`)
       }
-
-    )
+      )
   }
 
 }
+

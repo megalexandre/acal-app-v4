@@ -1,36 +1,34 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Category, Group } from '@model/default/group';
 import { NbToastrService } from '@nebular/theme';
-import { DataService } from 'app/@shared/data.service';
-import { GroupService } from './group.service';
+import { CategoryService } from './category.service';
 
 @Component({
-  selector: 'ngx-group',
+  selector: 'ngx-category',
   template: '<router-outlet></router-outlet>',
 })
-export class GroupComponent {
+export class CategoryComponent {
 
-  public id: string;
-  public loaded: boolean = false;
-  public group: Group;
   public form: FormGroup;
   public submmited: boolean = false;
 
   constructor(
     public formBuilder: FormBuilder,
-    public data: DataService,
     public activatedRoute: ActivatedRoute,
     public router: Router,
-    public service: GroupService,
-    public toastrService: NbToastrService,
-    ) { }
-
-
-  createForm() {
-
+    public service: CategoryService,
+    public toastrService: NbToastrService) {
   }
+
+  createForm(): void {
+    this.form = this.formBuilder.group({
+      name: [null, Validators.required],
+      value: [null, [Validators.required ]],
+      type: [null, [Validators.required]],
+    })
+  }
+
 
   public submit(){
     this.submmited = true;
@@ -39,22 +37,11 @@ export class GroupComponent {
       return
     }
 
-    this.commit()
+    this.commit();
   }
 
-  commit(){}
+  public commit(){}
 
-  selectCategory(category: Category){
-    this.category.setValue(category)
-  }
-
-  selectCurrency(value: number){
-    this.value.setValue(value)
-  }
-
-  selectCategoryCurrency(value: number){
-    this.categoryValue.setValue(value)
-  }
 
   public back(){
     this.router.navigate(['../list'],{relativeTo: this.activatedRoute})
@@ -75,15 +62,12 @@ export class GroupComponent {
     return this.form.get('name')
   }
 
-  get category(): AbstractControl {
-    return this.form.get('category')
-  }
-
   get value(): AbstractControl {
     return this.form.get('value')
   }
 
-  get categoryValue(): AbstractControl{
-    return this.form.get('categoryValue')
+  get type(): AbstractControl {
+    return this.form.get('type')
   }
+
 }

@@ -1,4 +1,3 @@
-export * from './category/category.pipe';
 export * from './reference/reference.pipe';
 export * from './param/param.pipe';
 export * from './identification/identification.pipe';

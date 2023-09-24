@@ -18,9 +18,9 @@ const routes: Routes = [
           .then(m => m.CustomerModule),
       },
       {
-        path: 'group',
-        loadChildren: () => import('../registration/group/group.module')
-          .then(m => m.GroupModule),
+        path: 'category',
+        loadChildren: () => import('../registration/category/category.module')
+          .then(m => m.CategoryModule),
       },
       {
         path: 'place',

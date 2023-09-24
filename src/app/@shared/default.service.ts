@@ -41,6 +41,10 @@ export abstract class DefaultService <
     return this.http.get<M>(`${this.env+'/'}${id}`);
   }
 
+  public update(model: M): Observable<M>{
+    return this.http.put<M>(`${this.env}`, model);
+  }
+
   public delete(id: string): Observable<M>{
     return this.http.delete<M>(`${this.env}/${id}`);
   }
@@ -48,11 +52,5 @@ export abstract class DefaultService <
   public save(model: M): Observable<M>{
     return this.http.post<M>(`${this.env}`, model);
   }
-
-  public update(model: M): Observable<M>{
-    return this.http.put<M>(`${this.env+'/update'}`, model);
-  }
-
-
 
 }

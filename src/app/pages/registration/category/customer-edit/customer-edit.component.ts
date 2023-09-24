@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '@model/default/customer';
 import { NbToastrService } from '@nebular/theme';
 import { DataService } from 'app/@shared/data.service';
-import { CustomerComponent } from '../customer.component';
-import { CustomerService } from './../customer.service';
+import { CustomerComponent } from '../category.component';
+import { CustomerService } from '../category.service';
 
 @Component({
   selector: 'ngx-customer-edit',

@@ -10,5 +10,5 @@ export * from './link'
 export * from './place'
 export * from './quality'
 export * from './user'
-
+export * from './category'
 

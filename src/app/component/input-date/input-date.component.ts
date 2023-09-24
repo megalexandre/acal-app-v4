@@ -7,12 +7,31 @@ import { isValid } from 'date-fns';
 })
 export class InputDateComponent {
   @Input() public status = 'basic';
-  @Input() public model: string | null = null;
+
+  @Input()
+  public set model(value: string | null) {
+    if (value !== null) {
+      const [year, month, day] = value.split('-').map(Number);
+      this._model = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+    } else {
+      this._model = null;
+    }
+  }
+  private _model: string | null = null;
+
   @Output() public modelChange = new EventEmitter<string>();
   @Output() public setDate = new EventEmitter<string>();
   @Output() public setBlur = new EventEmitter<boolean>();
 
+
   readonly completedSize = 10;
+
+  constructor() {
+    if(this.model !== null){
+      const [year, month, day] = this.model.split('-').map(Number);
+      this.model = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+    }
+  }
 
   emiteDate() {
     if (this.isValidDate()) {
@@ -54,4 +73,9 @@ export class InputDateComponent {
 
     return valid;
   }
+
+  public get model(): string | null {
+    return this._model;
+  }
+
 }

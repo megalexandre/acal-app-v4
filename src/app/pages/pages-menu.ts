@@ -23,7 +23,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Clientes',
-        link: '/pages/registration',
+        link: '/pages/registration/customer',
+      },
+      {
+        title: 'Categorias',
+        link: '/pages/registration/category',
       },
     ]
   },

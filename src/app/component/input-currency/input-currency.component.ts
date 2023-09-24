@@ -16,12 +16,20 @@ export class InputCurrencyComponent {
   public disabled: boolean = false;
 
   @Output()
-  public currencyChange: EventEmitter<number> = new EventEmitter<number>();
+  public currencyChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
   public emit(){
-    this.currencyChange.emit(Number(this.currency))
+
+    if (!this.currency) {
+      this.currencyChange.emit(null);
+    } else {
+      const exportCurrency = Number(this.currency).toFixed(2)
+    this.currencyChange.emit(exportCurrency)
+    }
+
+
   }
 
 }

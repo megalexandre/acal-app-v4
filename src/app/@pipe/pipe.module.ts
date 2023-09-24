@@ -1,15 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryPipe, IdentificationPipe, ParamPipe, ReferencePipe, DateTimePipe ,ReasonPipe, TypePipe } from '.';
+import { NgModule } from '@angular/core';
+import { DateTimePipe, IdentificationPipe, ParamPipe, ReasonPipe, ReferencePipe, TypePipe } from '.';
+import { CategoryTypePipe } from './category/category-type.pipe';
 
 const PIPES = [
   IdentificationPipe,
-  CategoryPipe,
   ParamPipe,
   ReferencePipe,
   DateTimePipe,
   ReasonPipe,
   TypePipe,
+  CategoryTypePipe,
 ];
 
 @NgModule({

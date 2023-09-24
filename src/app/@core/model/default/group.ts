@@ -1,33 +1,36 @@
 
+
+
+
 export interface Group {
   id: string,
   value: number,
-  categoryValue: number,
+  CategoryOLDValue: number,
   name: string,
-  category: Category,
+  CategoryOLD: CategoryOLD,
 }
 
 export interface GroupFilter {
   name?: string;
   document?: string;
-  category?: Category ;
-  categoryValue?: number;
+  CategoryOLD?: CategoryOLD ;
+  CategoryOLDValue?: number;
   value?: number;
 }
 
 export interface GroupPage {
   id: string,
   value: number,
-  categoryValue: number,
+  CategoryOLDValue: number,
   name: string,
-  category: Category,
+  CategoryOLD: CategoryOLD,
 }
 
 export class GroupPageFilter {
   name?: string = '';
   document?: string = '';
-  category?: Category = null;
-  categoryValue?: number = null;
+  CategoryOLD?: CategoryOLD = null;
+  CategoryOLDValue?: number = null;
   value?: number = null;
 
   page: number = 0;
@@ -38,9 +41,9 @@ export class GroupPageFilter {
   reset(){
     this.name = '';
     this.document = '';
-    this.category = null;
+    this.CategoryOLD = null;
     this.value = null;
-    this.categoryValue = null;
+    this.CategoryOLDValue = null;
 
     this.page = 0;
     this.pageSize = 10;
@@ -49,7 +52,7 @@ export class GroupPageFilter {
   }
 }
 
-export interface Category {
+export interface CategoryOLD {
   name: 'FOUNDER'|'EFFECTIVE'|'TEMPORARY',
 }
 

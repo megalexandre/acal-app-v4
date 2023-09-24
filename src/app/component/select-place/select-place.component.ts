@@ -1,16 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Address } from '@model/default/address';
-import { Place, PlacePageFilter } from '@model/default/place';
-import { Page } from '@model/page';
-import { PlaceService } from 'app/pages/registration/place/place.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ngx-select-place',
   templateUrl: './select-place.component.html',
   styleUrls: ['./select-place.component.scss']
 })
-export class SelectPlaceComponent implements OnInit{
-
+export class SelectPlaceComponent{
+  /*
   @Input()
   public title: String = ""
 
@@ -78,7 +74,7 @@ export class SelectPlaceComponent implements OnInit{
       },
     );
   }
-
+  */
 }
 
 

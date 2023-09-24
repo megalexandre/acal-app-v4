@@ -2,22 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
-import { CustomerComponent } from '../customer.component';
-import { CustomerService } from '../customer.service';
+import { CategoryComponent } from '../category.component';
+import { CategoryService } from '../category.service';
 
 @Component({
-  selector: 'ngx-customer-create',
-  templateUrl: './customer-create.component.html',
+  selector: 'ngx-category-create',
+  templateUrl: './category-create.component.html',
 })
-export class CustomerCreateComponent extends CustomerComponent implements OnInit {
+export class CategoryCreateComponent extends CategoryComponent implements OnInit {
 
-  public title: String = "Novo cliente";
+  public title: String = "Nova Categoria";
 
   constructor(
     public formBuilder: FormBuilder,
     public activatedRoute: ActivatedRoute,
     public router: Router,
-    public service: CustomerService,
+    public service: CategoryService,
     public toastrService: NbToastrService,
     ) {
     super(formBuilder, activatedRoute, router, service, toastrService);

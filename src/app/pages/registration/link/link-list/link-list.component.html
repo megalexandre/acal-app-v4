@@ -1,3 +1,5 @@
+
+<!--
 <nb-card>
 
   <nb-card-header >
@@ -57,13 +59,11 @@
             <nb-icon *ngIf="filter.sortedField === 'place.number' && filter.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
 
-          <!--
           <th class="col-1 align-middle" (click)="order('group.value')">
             Valor:
             <nb-icon *ngIf="filter.sortedField === 'group.value' && filter.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
             <nb-icon *ngIf="filter.sortedField === 'group.value' && filter.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
-          -->
 
           <th class="col-1 align-middle" colspan="2">
             <button nbButton outline status="basic" fullWidth (click)="add()">
@@ -98,7 +98,6 @@
           </th>
 
           <th>
-            <ngx-select-category [(category)]="filter.group.category" (categoryChange)="search()"></ngx-select-category>
           </th>
 
           <th>
@@ -113,11 +112,9 @@
             <input type="text" nbInput placeholder="Número" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.place.number">
           </th>
 
-          <!--
           <th>
             <input type="text" nbInput placeholder="Valor" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.group.value">
           </th>
-          -->
 
           <th>
             <button nbButton outline status="basic" type="button" fullWidth (click)="reset()">
@@ -145,9 +142,7 @@
           <td class="align-middle">{{item.group.name}}</td>
           <td class="align-middle">{{item.place.address.name}}</td>
           <td class="align-middle">{{item.place.number}}</td>
-          <!--
             <td class="align-middle">{{item.group.value | currency }}</td>
-          -->
           <td class="align-middle">
             <button nbButton outline status="basic" fullWidth (click)="view(item.id)">
               <nb-icon icon="eye-outline"></nb-icon>
@@ -176,3 +171,4 @@
   </nb-card-body>
 
 </nb-card>
+-->

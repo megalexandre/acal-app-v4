@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListComponent } from '@core/list.component';
-import { Category } from '@model/default/group';
 import { LinkPage, LinkPageFilter } from '@model/default/link';
 import { Page } from '@model/page';
 import { DataService } from 'app/@shared/data.service';
@@ -51,8 +50,8 @@ export class LinkListComponent extends ListComponent implements OnInit {
     })
   }
 
-  selectCategory(category: Category){
-    this.filter.group.category = category;
+  selectCategory(category: string){
+   // this.filter.group.category = category;
     this.search();
   }
 

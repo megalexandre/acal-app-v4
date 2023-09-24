@@ -71,8 +71,6 @@ export class LinkPageFilter {
   group?: GroupFilter = {
     name: null,
     document: null,
-    category: null,
-    categoryValue: null,
     value: null,
   };
   customer?: CustomerFilter = { name: null, document: null}
@@ -102,8 +100,6 @@ export class LinkPageFilter {
     this.group = {
       name: null,
       document: null,
-      category: null,
-      categoryValue: null,
       value: null,
     };
     this.customer =  { name: null, document: null};

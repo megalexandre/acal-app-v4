@@ -14,6 +14,7 @@ export const environment = {
   hydrometer: `${baseUrl + 'hydrometer'}`,
   quality: `${baseUrl + 'quality'}`,
   customer: `${baseUrl + 'customer'}`,
+  category: `${baseUrl + 'category'}`,
   user: `${baseUrl + 'user'}`,
   address: `${baseUrl + 'address'}`,
   group: `${baseUrl + 'group'}`,

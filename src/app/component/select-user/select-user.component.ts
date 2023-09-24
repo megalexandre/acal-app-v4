@@ -1,8 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Customer, CustomerFilter, CustomerPageFilter } from '@model/default/customer';
+import { Customer, CustomerPageFilter } from '@model/default/customer';
 import { Page } from '@model/page';
-import { DataService } from 'app/@shared/data.service';
 import { CustomerService } from 'app/pages/registration/customer/customer.service';
 
 @Component({
