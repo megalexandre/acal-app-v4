@@ -7,8 +7,8 @@ import { DataService } from 'app/@shared/data.service';
 import { CategoryService } from '../category.service';
 
 @Component({
-  templateUrl:'./Category-paginate.component.html',
-  styleUrls: ['./Category-paginate.component.scss']
+  templateUrl:'./category-paginate.component.html',
+  styleUrls: ['./category-paginate.component.scss']
 })
 export class CategoryPaginateComponent extends PaginateComponent implements OnInit {
 

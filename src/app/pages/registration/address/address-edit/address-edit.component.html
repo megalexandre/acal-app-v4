@@ -1,44 +1,64 @@
+<form [formGroup]="form" (submit)="submit()" *ngIf="loaded">
 
-<div *ngIf="loaded">
-  <form [formGroup]="form" (submit)="submit()">
-    <div class="row">
-      <div class="col-lg-12">
-        <nb-card>
+  <div class="row">
+    <div class="col-lg-12">
+      <nb-card>
 
-          <nb-card-header>
-            Atualizar Endereço
-          </nb-card-header>
+        <nb-card-header>
+          {{title}}
+        </nb-card-header>
 
-          <nb-card-body>
-            <div class="row mb-3">
+        <nb-card-body>
 
-              <div class="col-12">
-                <label for="name" class="label">Nome:</label>
-                <input id="name" type="text" nbInput fullWidth placeholder="Nome:" formControlName="name"  [status]="getStatus('name')">
-                <error-message [message]="'Nome é obrigatório'" [show]="(name.errors?.required && (submmited || this.form.touched))"></error-message>
-              </div>
+          <div class="row mb-3">
 
+            <div class="col-6">
+              <label for="area" class="label">Área:</label><br/>
+              <app-select-area id="area" formControlName="area" [submmited]="submmited"></app-select-area>
+              <error-message [message]="'Área é obrigatório'" [show]="(area.errors?.required && (submmited))"></error-message>
             </div>
 
-          </nb-card-body>
-          <nb-card-footer>
-
-            <div class="d-flex justify-content-between">
-              <button type="button" nbButton outline status="basic" (click)="back()">
-                <nb-icon icon="arrow-back-outline"></nb-icon>
-              </button>
-
-              <button type="submit" nbButton outline status="warning">
-                <nb-icon icon="edit-2-outline"></nb-icon>
-              </button>
+            <div class="col-3">
+               <label for="number" class="label">Número:</label>
+               <input id="number" type="text" mask="0*" nbInput fullWidth placeholder="Letra:" formControlName="number" [status]="getStatus('number')">
+               <error-message [message]="'Nome é obrigatório'" [show]="(number.errors?.required && (submmited))"></error-message>
             </div>
 
-          </nb-card-footer>
-        </nb-card>
+            <div class="col-3">
+               <label for="letter" class="label">Letra:</label>
+               <input id="letter" type="text" mask="A*" nbInput fullWidth placeholder="Letra:" formControlName="letter" [status]="getStatus('letter')">
+               <error-message [message]="'Nome é obrigatório'" [show]="(letter.errors?.required && (submmited))"></error-message>
+            </div>
 
-      </div>
+            <div class="col-12">
+              <label for="letter" class="label">Possui Hidrometro?:</label>
+              <nb-radio-group  formControlName="hasHydrometer" [status]="getStatus('hasHydrometer')">
+                <nb-radio [value]="true">Sim</nb-radio>
+                <nb-radio [value]="false">Não</nb-radio>
+              </nb-radio-group>
+            </div>
+
+
+          </div>
+
+        </nb-card-body>
+
+        <nb-card-footer>
+
+          <div class="d-flex justify-content-between">
+            <button type="button" nbButton outline status="basic" (click)="back()">
+              <nb-icon icon="arrow-back-outline"></nb-icon>
+            </button>
+
+            <button type="submit" nbButton outline status="success">
+              <nb-icon icon="save-outline"></nb-icon>
+            </button>
+          </div>
+        </nb-card-footer>
+
+      </nb-card>
 
     </div>
-  </form>
 
-</div>
+  </div>
+</form>

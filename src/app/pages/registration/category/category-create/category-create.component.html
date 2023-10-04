@@ -1,4 +1,5 @@
 <form [formGroup]="form" (submit)="submit()">
+
   <div class="row">
     <div class="col-lg-12">
       <nb-card>
@@ -10,109 +11,32 @@
         <nb-card-body>
 
           <div class="row mb-3">
-            <div class="col-12">
-              <label for="name" class="label">Nome:</label>
-              <input id="name" type="text" nbInput fullWidth placeholder="Nome:" formControlName="name"  [status]="getStatus('name')">
-              <error-message [message]="'Nome é obrigatório'" [show]="(name.errors?.required && (submmited || this.form.touched))"></error-message>
+
+            <div class="col-md-6 col-12">
+              <label for="type" class="label">Tipo:</label>
+              <app-category-type formControlName="type" [submmited]="submmited"> </app-category-type>
+              <error-message [message]="'Tipo é obrigatório'" [show]="(type.errors?.required && (submmited || this.form.touched))"></error-message>
             </div>
 
-            <div [ngClass]="personTypeValue === 'INDIVIDUAL'? 'col-xl-4 col-12':'col-md-6 col-12'" >
-              <label for="name" class="label">Documento:</label>
-              <nb-form-field>
-                <input id="document"
-                  type="text"
-                  [status]="getStatus('documentNumber')"
-                  [mask]="personTypeValue === 'INDIVIDUAL' ? '000.000.000-00':'00.000.000/0000-00'"
-                  nbInput placeholder="Documento" fullWidth formControlName="documentNumber" >
-
-                <button nbSuffix nbButton ghost (click)="togglePersonType()" type="button">
-                  <nb-icon [icon]="personTypeValue === 'INDIVIDUAL' ? 'person-outline' : 'car-outline'"
-                          pack="eva" [attr.aria-label]="personTypeValue === 'LEGAL' ? 'LEGAL' : 'PERSON'">
-                  </nb-icon>
-                </button>
-
-              </nb-form-field>
-              <error-message [message]="'Documento é obrigatório'" [show]="(documentNumber.errors?.required && (submmited || this.form.touched))"></error-message>
-              <error-message [message]="'Esse número não é valido'" [show]="(documentNumber.errors?.documentNotValid && (submmited || this.form.touched))"></error-message>
-
+            <div class="col-md-6 col-12">
+               <label for="name" class="label">Nome:</label>
+               <input id="name" type="text" nbInput fullWidth placeholder="Nome:" formControlName="name"  [status]="submmited ? getStatus('name') : 'basic' ">
+               <error-message [message]="'Nome é obrigatório'" [show]="(name.errors?.required && (submmited || this.form.touched))"></error-message>
             </div>
 
-            <div ngClass="col-xl-4 col-12" *ngIf="personTypeValue === 'INDIVIDUAL'" >
-              <label for="socio" class="label">Número de Sócio:</label>
-              <input id="membershipNumber" [status]="getStatus('membershipNumber')" mask="0*" type="text" nbInput fullWidth placeholder="Número de Sócio:" formControlName="membershipNumber">
-
-              <error-message [message]="'Número de sócio é obrigatório'" [show]="(membershipNumber.errors?.required && (submmited || this.form.touched))"></error-message>
+            <div class="col-md-6 col-12">
+              <label for="waterValue" class="label">Valor da Água:</label>
+              <app-currency formControlName="waterValue" [submitted]="submmited" ></app-currency>
+              <error-message [message]="'valor da água é obrigatório'" [show]="(waterValue.errors?.required && (submmited || this.form.touched))"></error-message>
             </div>
 
-              <div [ngClass]="personTypeValue === 'INDIVIDUAL'? 'col-xl-4 col-12':'col-xl-6 col-12'" >
-                <label for="birthDay" class="label">Data de Nascimento:</label>
-                <ngx-input-date
-                  (setBlur)="setBirthDayTouched()"
-                  (setDate)="setDate($event)"
-                  placeholder="Data de Nascimento:" [status]="getStatus('birthDay')"></ngx-input-date>
-                <error-message [message]="'Esse data não é valida'" [show]="(birthDay.errors?.dateNotValid && (submmited || this.form.touched))"></error-message>
-              </div>
+            <div class="col-md-6 col-12">
+              <label for="waterValue" class="label">Valor da Categoria:</label>
+              <app-currency formControlName="categoryValue" [submitted]="submmited" ></app-currency>
+              <error-message [message]="'valor da categoria é obrigatório'" [show]="(categoryValue.errors?.required && (submmited || this.form.touched))"></error-message>
             </div>
 
-            <div class="mb-3">
-              <label for="name" class="label" *ngIf="phoneNumbers.controls.length !== 0">Telefones:</label >
-
-              <div formArrayName="phoneNumbers">
-                <div *ngFor="let phoneNumber of phoneNumbers.controls; let i = index">
-                  <div [formGroupName]="i" class="phone-number">
-
-                    <div class="row mb-3">
-                      <div class="col-md-4">
-                        <input nbInput fullWidth formControlName="number" mask="00 0000-0000"
-                          [status]="submmited ? (form.get('phoneNumbers').get(i.toString()).get('number').valid ? 'success' : 'danger') : 'basic' "
-                          placeholder="Número de telefone"
-                         >
-
-                        <error-message [message]="'Escolha um número de telefone'"
-                          [show]="form.get('phoneNumbers').get(i.toString()).get('number').hasError('required') &&
-                          (submmited || form.get('phoneNumbers').get(i.toString()).get('number').touched)">
-                        </error-message>
-
-                      </div>
-
-                      <div class="col-md-3">
-                        <nb-checkbox status="basic"
-                        [status]="submmited ? (form.get('phoneNumbers').get(i.toString()).get('preferential').valid ? 'success' : 'danger') : 'basic' "
-                        fullWidth formControlName="preferential">Número principal</nb-checkbox>
-                      </div>
-
-                      <div class="col-md-2">
-                        <nb-checkbox status="basic"
-                        [status]="submmited ? (form.get('phoneNumbers').get(i.toString()).get('isWhatApp').valid ? 'success' : 'danger') : 'basic' "
-                        fullWidth formControlName="isWhatApp">É whatsapp?</nb-checkbox>
-                      </div>
-
-                      <div class="col-md-3">
-                        <button type="button" fullWidth nbButton (click)="removePhoneNumber(i)">Remover</button>
-                      </div>
-
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="mb-3" *ngIf="form.hasError('zeroPreferentialError', 'phoneNumbers') && submmited">
-                <hr/>
-                <error-message [message]="'Por favor, selecione um número preferencial'" [show]='true'></error-message>
-              </div>
-
-              <div class="mb-3" *ngIf="form.hasError('twoPreferentialError', 'phoneNumbers') && submmited">
-                <hr/>
-                <error-message [message]="'Por favor, selecione somente um número preferencial'" [show]='true'></error-message>
-              </div>
-
-              <div class="row">
-                <div class="offset-md-9 col-md-3 col-12">
-                  <button type="button" fullWidth nbButton (click)="addPhoneNumber()">Adicionar Telefone</button>
-                </div>
-              </div>
-            </div>
+          </div>
 
         </nb-card-body>
 

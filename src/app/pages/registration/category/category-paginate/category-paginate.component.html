@@ -16,25 +16,25 @@
               <nb-icon *ngIf="filter.sort.field === 'type' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
 
-          <th class="col-6 align-middle" (click)="order('name')">
+          <th class="col-4 align-middle" (click)="order('name')">
               Nome:
               <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
               <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
 
-          <th class="col-1 align-middle" (click)="order('waterValue')">
+          <th class="col-2 align-middle" (click)="order('waterValue')">
               Valor Água:
               <nb-icon *ngIf="filter.sort.field === 'waterValue' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
               <nb-icon *ngIf="filter.sort.field === 'waterValue' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
 
-          <th class="col-1 align-middle" (click)="order('categoryValue')">
+          <th class="col-2 align-middle" (click)="order('categoryValue')">
               Valor Categoria:
               <nb-icon *ngIf="filter.sort.field === 'categoryValue' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
               <nb-icon *ngIf="filter.sort.field === 'categoryValue' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
 
-          <th class="col-1 align-middle" (click)="order('categoryValue')">
+          <th class="col-2 align-middle" (click)="order('categoryValue')">
               Total:
               <nb-icon *ngIf="filter.sort.field === 'categoryValue' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
               <nb-icon *ngIf="filter.sort.field === 'categoryValue' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
@@ -52,7 +52,7 @@
         <tr>
 
           <th>
-            <ngx-select-category-type [(model)]="filter.type" (modelChange)="search()" ></ngx-select-category-type>
+            <app-category-type [(model)]="filter.type" (modelChange)="search()"></app-category-type>
           </th>
 
           <th>
@@ -60,15 +60,15 @@
           </th>
 
           <th>
-            <ngx-input-currency [(currency)]="filter.waterValue" placeholder="Valor" (keydown.enter)="search()" ></ngx-input-currency>
+            <app-currency [(model)]="filter.waterValue" placeholder="Água" (keydown.enter)="search()"></app-currency>
           </th>
 
           <th>
-            <ngx-input-currency [(currency)]="filter.categoryValue" placeholder="Valor" (keydown.enter)="search()" ></ngx-input-currency>
+            <app-currency [(model)]="filter.categoryValue" placeholder="Categori" (keydown.enter)="search()"></app-currency>
           </th>
 
           <th>
-            <ngx-input-currency [(currency)]="filter.totalValue" placeholder="Valor" (keydown.enter)="search()" ></ngx-input-currency>
+            <app-currency [(model)]="filter.totalValue" placeholder="Total" (keydown.enter)="search()"></app-currency>
           </th>
 
           <th>
@@ -110,7 +110,7 @@
 
       <tfoot>
         <tr>
-          <td colspan="5" *ngIf="page">
+          <td colspan="7" *ngIf="page">
             <ngx-app-table-footer [page]="page" (search)="paginate($event)">
             </ngx-app-table-footer>
           </td>

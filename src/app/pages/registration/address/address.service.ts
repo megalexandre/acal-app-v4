@@ -7,7 +7,7 @@ import { DefaultService } from 'app/@shared/default.service';
 @Injectable()
 export class AddressService extends DefaultService<Address, AddressFilter, AddressPage, AddressPageFilter> {
 
-  public get env(){
+  public get env(): string {
     return `${environment.address}`
   }
 

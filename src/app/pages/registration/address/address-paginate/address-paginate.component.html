@@ -1,0 +1,114 @@
+<nb-card>
+
+  <nb-card-header>
+    {{title}}
+  </nb-card-header>
+
+  <nb-card-body>
+
+    <ngx-app-table [nbSpinner]="loading" [tableStriped]="true">
+      <thead>
+        <tr>
+
+          <th class="col-6 align-middle" (click)="order('area')">
+              Área:
+              <nb-icon *ngIf="filter.sort.field === 'area' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+              <nb-icon *ngIf="filter.sort.field === 'area' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+          </th>
+
+          <th class="col-2 align-middle" (click)="order('number')">
+              Número:
+              <nb-icon *ngIf="filter.sort.field === 'number' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+              <nb-icon *ngIf="filter.sort.field === 'number' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+          </th>
+
+          <th class="col-2 align-middle" (click)="order('letter')">
+              Letra:
+              <nb-icon *ngIf="filter.sort.field === 'letter' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+              <nb-icon *ngIf="filter.sort.field === 'letter' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+          </th>
+
+          <th class="col-1 align-middle" (click)="order('hasHydrometer')">
+              Hidrômetro:
+              <nb-icon *ngIf="filter.sort.field === 'hasHydrometer' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+              <nb-icon *ngIf="filter.sort.field === 'hasHydrometer' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+          </th>
+
+          <th class="col-1 align-middle" colspan="2">
+            <button nbButton outline status="basic" fullWidth (click)="create()">
+              <nb-icon icon="plus-outline"></nb-icon>
+            </button>
+          </th>
+        </tr>
+      </thead>
+
+      <thead>
+        <tr>
+
+          <th>
+            <app-select-area id="area" [(model)]="filter.area" (modelChange)="search()"></app-select-area>
+          </th>
+
+          <th>
+            <input type="text" nbInput placeholder="Número" fullWidth mask="0*" (keydown.enter)="search()" [(ngModel)]="filter.number">
+          </th>
+
+          <th>
+            <input type="text" nbInput placeholder="Letra" mask="A*" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.letter">
+          </th>
+
+          <th>
+            <app-yes-or-no [(model)]="filter.hasHydrometer" (modelChange)="search()"></app-yes-or-no>
+          </th>
+
+          <th>
+            <button nbButton outline status="basic" type="button" fullWidth (click)="reset()">
+              <nb-icon icon="undo-outline"></nb-icon>
+            </button>
+          </th>
+
+          <th>
+            <button nbButton outline status="success" fullWidth (click)="search()">
+              <nb-icon icon="funnel-outline"></nb-icon>
+            </button>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody >
+        <tr *ngFor="let item of page?.content">
+
+          <td class="align-middle"> {{item.area.name }}</td>
+          <td class="align-middle"> {{item.number }}</td>
+          <td class="align-middle"> {{item.letter }}</td>
+          <td class="align-middle"> {{item.hasHydrometer ? 'Sim' :'Não'}}</td>
+
+          <td class="align-middle">
+            <button nbButton outline status="warning" fullWidth (click)="edit(item.id)">
+              <nb-icon icon="edit-2-outline"></nb-icon>
+            </button>
+          </td>
+
+          <td class="align-middle">
+            <button nbButton outline status="danger" fullWidth (click)="remove(item.id)" >
+              <nb-icon icon="trash-2-outline"></nb-icon>
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td colspan="6" *ngIf="page">
+            <ngx-app-table-footer [page]="page" (search)="paginate($event)">
+            </ngx-app-table-footer>
+          </td>
+        </tr>
+      </tfoot>
+
+    </ngx-app-table>
+
+  </nb-card-body>
+
+</nb-card>

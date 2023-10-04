@@ -73,31 +73,14 @@ export class SelectAddressComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit(): void {
 
-    this.service.getAll().subscribe(
+    this.service.list().subscribe(
       (adresses: Address[])=>{
-        this.createGroups(adresses)
         this.loaded = true;
       }
     );
 
   }
 
-  createGroups(adresses: Address[]){
-    this.groups.forEach(g =>{
-      g.values = adresses.filter(a => a.name.toLowerCase().startsWith(g.name.toLowerCase()))
-
-    })
-
-    this.groups[OUTROS].values = adresses.filter(ad =>
-      !this.defaulValues.map(value=> value.toLocaleLowerCase()).includes(ad.name.substring(0, ad.name.indexOf(' ')) .toLocaleLowerCase())
-    )
-
-    this.groups.forEach(group =>{
-      group.values.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
-    })
-
-    this.groups = this.groups.filter((group)=> group.values.length >0 )
-  }
 
   selectedChange(address: Address){
     this.addressChange.emit(address)

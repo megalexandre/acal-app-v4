@@ -7,16 +7,15 @@ import { NgxMaskModule } from 'ngx-mask';
 import { AcalModule } from './../@acal/acal.module';
 import { PipeModule } from './../@pipe/pipe.module';
 import { CustomerService } from './../pages/registration/customer/customer.service';
-import { PlaceService } from './../pages/registration/place/place.service';
 import { InputCurrencyComponent } from './input-currency/input-currency.component';
 import { InputDateTimeComponent } from './input-date-time/input-date-time.component';
 import { InputDateComponent } from './input-date/input-date.component';
 import { PickReasonComponent } from './pick-reason/pick-reason.component';
 import { PickTypeComponent } from './pick-type/pick-type.component';
 import { SelectAddressComponent } from './select-address/select-address.component';
+import { SelectCategoryTypeComponent } from './select-category-type/select-category-type.component';
 import { SelectPlaceComponent } from './select-place/select-place.component';
 import { SelectUserComponent } from './select-user/select-user.component';
-import { SelectCategoryTypeComponent } from './select-category-type/select-category-type.component';
 
 const PIPES = [
   SelectUserComponent,
@@ -55,7 +54,6 @@ const PIPES = [
   providers:[
     AddressService,
     CustomerService,
-    PlaceService,
   ]
 })
 export class ComponentModule { }

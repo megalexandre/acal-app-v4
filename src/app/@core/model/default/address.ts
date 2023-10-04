@@ -1,36 +1,48 @@
+import { Area } from "./area";
+import { PageFilter } from "./page-filter";
 
 export interface Address {
-  id?: string,
-  name?: string,
+  id: string,
+  area: Area,
+  number: string,
+  letter: string,
+  hasHydrometer: boolean,
 }
 
-export class AddressFilter {
-  id?: string = null;
-  name?: string = null;
+export interface AddressFilter {
+  id: string,
+  area: Area,
+  number: string,
+  letter: string,
+  hasHydrometer: boolean,
 }
 
 export interface AddressPage {
-  id?: string;
-  name?: string;
+  id: string,
+  area: Area,
+  number: string,
+  letter: string,
 }
 
-export class AddressPageFilter {
-  id?: string = '';
-  name?: string = '';
-  page: number = 0;
-  pageSize: number = 10;
-  direction: string = 'ASC';
-  sortedField: string = 'id';
+export class AddressPageFilter extends PageFilter {
+  id?: string = null;
+  area?: Area = null;
+  number?: string = null;
+  letter?: string = null;
+  hasHydrometer?: boolean = null;
 
   reset(){
-    this.page = 0;
-    this.pageSize = 10;
-    this.direction = 'ASC';
-    this.sortedField = 'id';
-
-    this.id = '';
-    this.name = '';
+    super.reset();
+    this.id = null;
+    this.area = null;
+    this.number = null;
+    this.letter = null;
+    this.hasHydrometer = null;
   }
-
 }
+
+
+
+
+
 

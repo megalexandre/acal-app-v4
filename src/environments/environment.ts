@@ -16,6 +16,7 @@ export const environment = {
   customer: `${baseUrl + 'customer'}`,
   category: `${baseUrl + 'category'}`,
   user: `${baseUrl + 'user'}`,
+  area: `${baseUrl + 'area'}`,
   address: `${baseUrl + 'address'}`,
   group: `${baseUrl + 'group'}`,
   link: `${baseUrl + 'link'}`,

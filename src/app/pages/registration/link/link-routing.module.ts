@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LinkAddComponent } from './link-add/link-add.component';
-import { LinkInactiveComponent } from './link-inactive/link-inactive.component';
-import { LinkListComponent } from './link-list/link-list.component';
-import { LinkViewComponent } from './link-view/link-view.component';
 import { LinkComponent } from './link.component';
+import { LinkPaginateComponent } from './link-paginate/link-paginate.component';
+import { LinkCreateComponent } from './link-create/link-create.component';
+import { LinkEditComponent } from './link-edit/link-edit.component';
+import { LinkDeleteComponent } from './link-delete/link-delete.component';
 
 const routes: Routes = [
   {
@@ -12,28 +12,26 @@ const routes: Routes = [
     component: LinkComponent,
     children: [
     {
-      path: 'list',
-      component: LinkListComponent
+      path: 'paginate',
+      component: LinkPaginateComponent
     },
     {
-      path: 'add',
-      component: LinkAddComponent
+      path: 'create',
+      component: LinkCreateComponent
     },
     {
-      path: 'view',
-      component: LinkViewComponent
+      path: 'edit',
+      component: LinkEditComponent
     },
     {
-      path: 'inactive',
-      component: LinkInactiveComponent
+      path: 'delete',
+      component: LinkDeleteComponent
     },
-    { path: '', redirectTo: 'list', pathMatch: 'full' },
-    { path: '**', redirectTo: 'list' },
+    { path: '', redirectTo: 'paginate', pathMatch: 'full' },
+    { path: '**', redirectTo: 'paginate' },
     ]
   },
-
 ];
-
 
 @NgModule({
   imports: [

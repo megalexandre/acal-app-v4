@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddressAddComponent } from './address-add/address-add.component';
-import { AddressDeleteComponent } from './address-delete/address-delete.component';
-import { AddressEditComponent } from './address-edit/address-edit.component';
-import { AddressListComponent } from './address-list/address-list.component';
 import { AddressComponent } from './address.component';
+import { AddressPaginateComponent } from './address-paginate/address-paginate.component';
+import { AddressCreateComponent } from './address-create/address-create.component';
+import { AddressEditComponent } from './address-edit/address-edit.component';
+import { AddressDeleteComponent } from './address-delete/address-delete.component';
 
 const routes: Routes = [
   {
@@ -12,12 +12,12 @@ const routes: Routes = [
     component: AddressComponent,
     children: [
     {
-      path: 'list',
-      component: AddressListComponent
+      path: 'paginate',
+      component: AddressPaginateComponent
     },
     {
-      path: 'add',
-      component: AddressAddComponent
+      path: 'create',
+      component: AddressCreateComponent
     },
     {
       path: 'edit',
@@ -27,13 +27,12 @@ const routes: Routes = [
       path: 'delete',
       component: AddressDeleteComponent
     },
-    { path: '', redirectTo: 'list', pathMatch: 'full' },
-    { path: '**', redirectTo: 'list' },
+    { path: '', redirectTo: 'paginate', pathMatch: 'full' },
+    { path: '**', redirectTo: 'paginate' },
     ]
   },
 
 ];
-
 
 @NgModule({
   imports: [

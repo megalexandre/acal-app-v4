@@ -80,10 +80,10 @@
 
           <th>
             <input type="text" mask="0*" nbInput placeholder="Número" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.number">
+            <input type="text" mask="A*" nbInput placeholder="Letra" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.letter">
           </th>
 
           <th>
-            <input type="text" mask="A*" nbInput placeholder="Letra" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.letter">
           </th>
 
           <th colspan="2">

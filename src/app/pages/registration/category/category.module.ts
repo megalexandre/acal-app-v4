@@ -11,6 +11,10 @@ import { CategoryRoutingModule } from './category-routing.module';
 import { CategoryComponent } from './category.component';
 import { CategoryService } from './category.service';
 import { CategoryPaginateComponent } from './category-paginate/category-paginate.component';
+import { CategoryCreateComponent } from './category-create/category-create.component';
+import { AppComponentModule } from 'app/@app-component/app-component.module';
+import { CategoryEditComponent } from './category-edit/category-edit.component';
+import { CategoryDeleteComponent } from './category-delete/category-delete.component';
 
 @NgModule({
   imports: [
@@ -30,15 +34,14 @@ import { CategoryPaginateComponent } from './category-paginate/category-paginate
     NbCheckboxModule,
     NgxMaskModule.forChild(),
     DirectiveModule,
+    AppComponentModule,
   ],
   declarations: [
     CategoryComponent,
-    CategoryPaginateComponent,
-    /*
     CategoryCreateComponent,
+    CategoryPaginateComponent,
     CategoryEditComponent,
     CategoryDeleteComponent,
-    */
   ],
   providers: [
     CategoryService,

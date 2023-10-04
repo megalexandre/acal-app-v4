@@ -58,7 +58,8 @@
             <div class="mb-3">
 
               <div formArrayName="phoneNumbers">
-                <div *ngFor="let phoneNumber of phoneNumbers.controls; let i = index">
+                <label for="name" class="label" *ngIf="phoneNumbers.controls.length !== 0">Telefones:</label >
+                <div *ngFor="let phoneNumber of phoneNumbers?.controls; let i = index">
                   <div [formGroupName]="i" class="phone-number">
 
                     <div class="row mb-3">

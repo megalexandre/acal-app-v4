@@ -46,11 +46,7 @@
 
               <div [ngClass]="personTypeValue === 'INDIVIDUAL'? 'col-xl-4 col-12':'col-xl-6 col-12'" >
                 <label for="birthDay" class="label">Data de Nascimento:</label>
-                <ngx-input-date
-                  (setBlur)="setBirthDayTouched()"
-                  (setDate)="setDate($event)"
-                  placeholder="Data de Nascimento:" [status]="getStatus('birthDay')"></ngx-input-date>
-                <error-message [message]="'Esse data não é valida'" [show]="(birthDay.errors?.dateNotValid && (submmited || this.form.touched))"></error-message>
+                <app-date [submmited]="submmited" formControlName="birthDay"></app-date>
               </div>
             </div>
 

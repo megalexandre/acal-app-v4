@@ -26,7 +26,7 @@ export class InputCurrencyComponent {
       this.currencyChange.emit(null);
     } else {
       const exportCurrency = Number(this.currency).toFixed(2)
-    this.currencyChange.emit(exportCurrency)
+      this.currencyChange.emit(exportCurrency)
     }
 
 

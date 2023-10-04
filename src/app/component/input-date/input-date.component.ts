@@ -6,6 +6,7 @@ import { isValid } from 'date-fns';
   templateUrl: './input-date.component.html',
 })
 export class InputDateComponent {
+
   @Input() public status = 'basic';
 
   @Input()
@@ -17,12 +18,12 @@ export class InputDateComponent {
       this._model = null;
     }
   }
+
   private _model: string | null = null;
 
   @Output() public modelChange = new EventEmitter<string>();
   @Output() public setDate = new EventEmitter<string>();
   @Output() public setBlur = new EventEmitter<boolean>();
-
 
   readonly completedSize = 10;
 

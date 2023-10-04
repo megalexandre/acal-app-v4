@@ -1,61 +1,72 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Address } from '@model/default/address';
+import { Address } from '@model/default/_index';
 import { NbToastrService } from '@nebular/theme';
 import { DataService } from 'app/@shared/data.service';
 import { AddressComponent } from '../address.component';
-import { AddressService } from './../address.service';
+import { AddressService } from '../address.service';
 
 @Component({
-  selector: 'ngx-address-edit',
   templateUrl: './address-edit.component.html',
-  styleUrls: ['./address-edit.component.scss']
 })
 export class AddressEditComponent extends AddressComponent implements OnInit {
 
+  public title: String = "Editar Endereço";
+
+  public adress: Address;
+  public id: string;
+  public loaded: boolean = false;
+
   constructor(
     public data: DataService,
-    public service: AddressService,
     public formBuilder: FormBuilder,
     public activatedRoute: ActivatedRoute,
     public router: Router,
+    public service: AddressService,
     public toastrService: NbToastrService,
     ) {
-      super(data, formBuilder, activatedRoute, router, service,  toastrService)
-    }
+    super(formBuilder, activatedRoute, router, service, toastrService);
+  }
 
   ngOnInit(): void {
+    this.id = this.data.id
+    if(!this.id){
+      super.back()
+    }
+
+    this.service.getById(this.id).subscribe(
+      (adress: Address)=> {
+        this.adress = adress;
+          this.createForm();
+          this.patchFormValues(adress)
+          this.loaded = true
+      }
+    )
+
     this.createForm()
   }
 
-  override createForm(): void {
-    if(!this.data.id){
-      this.back()
-    }
 
-    this.id = this.data.id
-    this.service.getById(this.id).subscribe(
-      (address: Address)=> {
-        this.address = address;
+  patchFormValues(adress: Address){
+    this.form.patchValue({
+      number: adress.number,
+      area: adress.area,
+      letter: adress.letter,
+      hasHydrometer: adress.hasHydrometer,
+    });
 
-        this.form = this.formBuilder.group({
-          id: [address.id, Validators.required],
-          name: [address.name, Validators.required],
-        })
-        this.loaded = true
-      }
-    )
+    this.form.addControl('id', this.formBuilder.control(adress.id));
   }
 
-  override commit(){
+  public override commit(): void {
     this.service.update(this.form.value).subscribe(
       () => {
-        this.toastrService.success(`Sucesso`, `Registro editado`)
+        this.toastrService.success(`Sucesso`, `Registro Editado`)
         this.router.navigate(['../list'],{relativeTo: this.activatedRoute})
       },
       (response) =>{
-        this.toastrService.danger(response.error.detail, `Não foi possivel realizar a ação`)
+        this.toastrService.danger(`Não foi possivel realizar a ação`, response.error.cause,)
       }
     )
   }

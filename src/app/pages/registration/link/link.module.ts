@@ -1,23 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbAccordionModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbFormFieldModule, NbIconModule, NbInputModule, NbRadioModule, NbSelectModule, NbSpinnerModule, NbStepperModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbCheckboxModule, NbFormFieldModule, NbIconModule, NbInputModule, NbSpinnerModule, NbStepperModule, NbTabsetModule } from '@nebular/theme';
 import { AcalModule } from 'app/@acal/acal.module';
+import { AppComponentModule } from 'app/@app-component/app-component.module';
+import { DirectiveModule } from 'app/@directive/directive.module';
 import { PipeModule } from 'app/@pipe/pipe.module';
 import { ComponentModule } from 'app/component/component.module';
 import { NgxMaskModule } from 'ngx-mask';
-import { LinkAddComponent } from './link-add/link-add.component';
-import { LinkFilterComponent } from './link-filter/link-filter.component';
-import { LinkListComponent } from './link-list/link-list.component';
-import { LinkReviewComponent } from './link-review/link-review.component';
+import { LinkCreateComponent } from './link-create/link-create.component';
+import { LinkDeleteComponent } from './link-delete/link-delete.component';
+import { LinkEditComponent } from './link-edit/link-edit.component';
+import { LinkPaginateComponent } from './link-paginate/link-paginate.component';
 import { LinkRoutingModule } from './link-routing.module';
-import { LinkViewComponent } from './link-view/link-view.component';
 import { LinkComponent } from './link.component';
 import { LinkService } from './link.service';
-import { LinkInactiveComponent } from './link-inactive/link-inactive.component';
 
 @NgModule({
-
   imports: [
     CommonModule,
     LinkRoutingModule,
@@ -31,24 +30,23 @@ import { LinkInactiveComponent } from './link-inactive/link-inactive.component';
     NbIconModule,
     PipeModule,
     NbFormFieldModule,
-    NgxMaskModule.forChild(),
-    NbStepperModule,
     ComponentModule,
-    NbSelectModule,
-    NbAccordionModule,
-    NbRadioModule,
+    NbCheckboxModule,
+    NgxMaskModule.forChild(),
+    DirectiveModule,
+    AppComponentModule,
+    NbStepperModule,
+    NbTabsetModule,
   ],
   declarations: [
     LinkComponent,
-    LinkListComponent,
-    LinkAddComponent,
-    LinkViewComponent,
-    LinkReviewComponent,
-    LinkFilterComponent,
-    LinkInactiveComponent,
+    LinkCreateComponent,
+    LinkPaginateComponent,
+    LinkEditComponent,
+    LinkDeleteComponent,
   ],
   providers: [
-    LinkService
+    LinkService,
   ]
 })
 export class LinkModule { }

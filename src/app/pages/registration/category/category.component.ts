@@ -5,7 +5,6 @@ import { NbToastrService } from '@nebular/theme';
 import { CategoryService } from './category.service';
 
 @Component({
-  selector: 'ngx-category',
   template: '<router-outlet></router-outlet>',
 })
 export class CategoryComponent {
@@ -24,11 +23,11 @@ export class CategoryComponent {
   createForm(): void {
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
-      value: [null, [Validators.required ]],
-      type: [null, [Validators.required]],
+      waterValue: [null, Validators.required],
+      categoryValue: [null, Validators.required],
+      type: [null, Validators.required],
     })
   }
-
 
   public submit(){
     this.submmited = true;
@@ -62,8 +61,12 @@ export class CategoryComponent {
     return this.form.get('name')
   }
 
-  get value(): AbstractControl {
-    return this.form.get('value')
+  get waterValue(): AbstractControl {
+    return this.form.get('waterValue')
+  }
+
+  get categoryValue(): AbstractControl {
+    return this.form.get('categoryValue')
   }
 
   get type(): AbstractControl {

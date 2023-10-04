@@ -14,6 +14,8 @@ import { CustomerPaginateComponent } from './customer-paginate/customer-paginate
 import { AcalModule } from 'app/@acal/acal.module';
 import { PipeModule } from 'app/@pipe/pipe.module';
 import { DirectiveModule } from 'app/@directive/directive.module';
+import { AppComponent } from 'app/app.component';
+import { AppComponentModule } from 'app/@app-component/app-component.module';
 
 @NgModule({
   imports: [
@@ -33,6 +35,7 @@ import { DirectiveModule } from 'app/@directive/directive.module';
     NbCheckboxModule,
     NgxMaskModule.forChild(),
     DirectiveModule,
+    AppComponentModule,
   ],
   declarations: [
     CustomerComponent,

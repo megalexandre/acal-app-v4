@@ -2,6 +2,33 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
+    title: 'Cadastros',
+    icon: 'file-text-outline',
+    children: [
+      {
+        title: 'Ligações',
+        link: '/pages/registration/link',
+      },
+      {
+        title: 'Clientes',
+        link: '/pages/registration/customer/paginate',
+      },
+      {
+        title: 'Categorias',
+        link: '/pages/registration/category',
+      },
+      {
+        title: 'Áreas',
+        link: '/pages/registration/area',
+      },
+      {
+        title: 'Endereços',
+        link: '/pages/registration/address',
+      },
+    ]
+  },
+
+  {
     title: 'E-commerce',
     icon: 'shopping-cart-outline',
     link: '/pages/dashboard',
@@ -15,21 +42,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'FEATURES',
     group: true,
-  },
-
-  {
-    title: 'Cadastros',
-    icon: 'file-text-outline',
-    children: [
-      {
-        title: 'Clientes',
-        link: '/pages/registration/customer',
-      },
-      {
-        title: 'Categorias',
-        link: '/pages/registration/category',
-      },
-    ]
   },
   {
 

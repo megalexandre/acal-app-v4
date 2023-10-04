@@ -38,11 +38,13 @@
 
             </div>
 
-            <div *ngFor="let phoneNumber of customer.phoneNumbers; let i = index">
+              <label for="name" class="label" *ngIf="customer.phoneNumbers.length !== 0">Telefones:</label >
+              <div *ngFor="let phoneNumber of customer.phoneNumbers; let i = index">
+
                 <div class="row mb-3">
 
                   <div class="col-md-6">
-                    <input nbInput fullWidth [(ngModel)]="phoneNumber.numeber" mask="00 00000-0000" disabled  placeholder="Número de telefone">
+                    <input nbInput fullWidth [(ngModel)]="phoneNumber.number" mask="00 00000-0000" disabled  placeholder="Número de telefone">
                   </div>
 
                   <div class="col-md-3">
@@ -53,7 +55,7 @@
                     <nb-checkbox status="basic" [(ngModel)]="phoneNumber.isWhatApp" fullWidth >É whatsapp?</nb-checkbox>
                   </div>
                 </div>
-            </div>
+              </div>
 
           </nb-card-body>
           <nb-card-footer>

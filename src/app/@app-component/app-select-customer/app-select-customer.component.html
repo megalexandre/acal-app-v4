@@ -1,0 +1,97 @@
+<ng-container *ngIf="customer === null">
+
+  <ngx-app-table [nbSpinner]="loading" [tableStriped]="true" class="w-100" >
+    <thead>
+      <tr>
+
+        <th class="col-8 align-middle" (click)="order('name')">
+            Nome:
+            <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+            <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+        </th>
+
+        <th class="col-3 align-middle" (click)="order('documentNumber')">
+            Documento:
+            <nb-icon *ngIf="filter.sort.field === 'documentNumber' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+            <nb-icon *ngIf="filter.sort.field === 'documentNumber' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+        </th>
+
+        <th class="col-1 align-middle" colspan="2">
+        </th>
+      </tr>
+    </thead>
+
+    <thead>
+      <tr>
+
+        <th>
+          <input type="text" nbInput placeholder="Nome" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.name">
+        </th>
+
+        <th>
+          <nb-form-field>
+            <input type="text" mask="0*" nbInput placeholder="Documento" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.documentNumber">
+          </nb-form-field>
+
+        </th>
+
+        <th>
+          <button nbButton outline status="basic" type="button" fullWidth (click)="reset()">
+            <nb-icon icon="undo-outline"></nb-icon>
+          </button>
+        </th>
+
+        <th>
+          <button nbButton outline status="success" fullWidth (click)="search()">
+            <nb-icon icon="funnel-outline"></nb-icon>
+          </button>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody >
+      <tr *ngFor="let item of page?.content">
+        <td class="align-middle"> <u  class="btn btn-link" (click)="emit(item)">{{item.name}} </u> </td>
+        <td class="align-middle">{{item.documentNumber | identification}}</td>
+
+        <td colspan="2" class="align-middle">
+          <button nbButton outline status="basic" fullWidth (click)="emit(item)">
+            <nb-icon icon="arrow-upward-outline"></nb-icon>
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="4" *ngIf="page">
+          <ngx-app-table-footer [page]="page" (search)="paginate($event)">
+          </ngx-app-table-footer>
+        </td>
+      </tr>
+    </tfoot>
+
+  </ngx-app-table>
+
+  </ng-container>
+
+  <ng-container *ngIf="customer !== null">
+
+  <ngx-app-table [tableStriped]="true" class="border w-100" >
+
+    <tbody>
+      <tr>
+        <td class="col-9 align-middle" >{{customer.name}}</td>
+        <td class="col-3 align-middle" >
+          <button nbButton outline status="basic" fullWidth (click)="remove()">
+            Remover
+            <nb-icon icon="person-remove-outline"></nb-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+
+    </ngx-app-table>
+  </ng-container>

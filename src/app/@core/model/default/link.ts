@@ -1,137 +1,66 @@
-import { CustomerFilter } from '@model/default/customer';
-import { Address, AddressFilter, Category, Customer, Group, GroupFilter, Hydrometer, PersonType, Place, PlaceFilter } from "./_index";
+import { Address, Category, Customer } from "./_index";
+import { PageFilter } from "./page-filter";
 
 export interface Link {
   id: string,
-  group: Group,
+  category: Category,
+  address: Address,
+  mailAddress: Address,
   customer: Customer,
-  place: Place,
-  mailPlace: Place,
-  linkName: String,
   active: Boolean,
-  startedAt: Date,
-  finishedAt: Date,
-  hydrometer?: Hydrometer,
+  startedAt: string,
+  finishedAt: string,
   createdBy: string,
 }
 
-export interface HydrometerGenerater {
-  addressName: String,
-  linkHydrometerPair: LinkHydrometerPair[]
-}
-
-export interface LinkHydrometerPair {
-  link: Link,
-  lastConsumption: number,
-  actualConsumption?: number,
-  value: number,
-  checked?: boolean;
+export interface LinkFilter {
+  id: string,
+  category: Category,
+  address: Address,
+  mailAddress: Address,
+  customer: Customer,
+  active: Boolean,
+  startedAt: string,
+  finishedAt: string,
+  createdBy: string,
 }
 
 export interface LinkPage {
   id: string,
-  group: Group,
+  category: Category,
+  address: Address,
+  mailAddress: Address,
   customer: Customer,
-  place: Place,
-  mailPlace: Place,
-  linkName: String,
   active: Boolean,
-  startedAt: Date,
-  finishedAt: Date,
-  hydrometer?: Hydrometer,
+  startedAt: string,
+  finishedAt: string,
   createdBy: string,
 }
 
-export class LinkFilter {
-  id?: string;
-  active?: boolean = null;
-  group?: GroupFilter = null;
-  customer?: CustomerFilter = null;
-  place?: PlaceFilter = null;
-  personType?: PersonType = null;
+export class LinkPageFilter extends PageFilter {
+  id?: string = null;
+  category?: Category= null;
+  address?: Address = null;
+  mailAddress?: Address = null;
+  customer?: Customer = null;
+  active?: Boolean = null;
+  startedAt?: string = null;
+  finishedAt?: string = null;
+  createdBy?: string = null;
 
-  page: number = 0;
-  pageSize: number = 10;
-  direction: string = 'ASC';
-  sortedField: string = 'id';
-
-  reset(): void {
-  }
-}
-
-export class LinkPageFilter {
-  id?: string;
-  active?: boolean = null;
-  category?: Category = null;
-
-  address?: AddressFilter = {
-    id: null,
-    name: null,
-  };
-  group?: GroupFilter = {
-    name: null,
-    document: null,
-    value: null,
-  };
-  customer?: CustomerFilter = { name: null, document: null}
-  place?: PlaceFilter = {
-    number: null,
-    letter: null,
-    address: {
-      id: null,
-      name: null,
-    },
-  };
-  personType?: PersonType = {name: 'INDIVIDUAL'};
-
-  page: number = 0;
-  pageSize: number = 10;
-  direction: string = 'ASC';
-  sortedField: string = 'id';
-
-  reset(): void {
+  reset(){
+    super.reset();
     this.id = null;
-    this.active = null;
     this.category = null;
-    this.address = {
-      id: null,
-      name: null,
-    };
-    this.group = {
-      name: null,
-      document: null,
-      value: null,
-    };
-    this.customer =  { name: null, document: null};
-    this.place = {
-      number: null,
-      letter: null,
-      address: {
-        id: null,
-        name: null,
-      },
-    };
-    this.personType = {name: 'INDIVIDUAL'};;
-
-    this.page = 0;
-    this.pageSize = 10;
-    this.direction = 'ASC';
-    this.sortedField = 'id';
+    this.address = null;
+    this.mailAddress = null;
+    this.customer = null;
+    this.active = null;
+    this.startedAt = null;
+    this.finishedAt = null;
+    this.createdBy = null;
   }
+
 }
 
-
-export interface LinkGroupedByAddress {
-  address: Address,
-  selected: boolean;
-  links: SelectLink[]
-}
-
-export interface SelectLink{
-  selected: boolean,
-  link: Link,
-  hydrometerValue: number,
-  categoryValue: number,
-  value: number
-}
 

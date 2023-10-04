@@ -8,6 +8,16 @@ const routes: Routes = [
     component: RegistrationComponent,
     children: [
       {
+        path: 'link',
+        loadChildren: () => import('../registration/link/link.module')
+          .then(m => m.LinkModule),
+      },
+      {
+        path: 'area',
+        loadChildren: () => import('../registration/area/area.module')
+          .then(m => m.AreaModule),
+      },
+      {
         path: 'address',
         loadChildren: () => import('../registration/address/address.module')
           .then(m => m.AddressModule),
@@ -21,16 +31,6 @@ const routes: Routes = [
         path: 'category',
         loadChildren: () => import('../registration/category/category.module')
           .then(m => m.CategoryModule),
-      },
-      {
-        path: 'place',
-        loadChildren: () => import('../registration/place/place.module')
-          .then(m => m.PlaceModule),
-      },
-      {
-        path: 'link',
-        loadChildren: () => import('../registration/link/link.module')
-          .then(m => m.LinkModule),
       },
     { path: '', redirectTo: 'customer', pathMatch: 'full' },
     { path: '**', redirectTo: 'customer' },

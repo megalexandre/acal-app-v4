@@ -17,6 +17,10 @@ export abstract class DefaultService <
     return this.http.post<Page<ModelPage>>(`${this.env+'/paginate'}`, filterPage);
   }
 
+  public list(): Observable<M[]>{
+    return this.http.get<M[]>(`${this.env + '/all'}`);
+  }
+
   public getReport(filter: Filter){
     return this.http.post<any>(`${this.env}/report`, filter, { 'responseType': 'arraybuffer' as 'json' })
   }
@@ -29,9 +33,6 @@ export abstract class DefaultService <
     return this.http.post<Page<ModelPage>>(`${this.env+'/paginate'}`, filterPage);
   }
 
-  public getAll(): Observable<M[]>{
-    return this.http.get<M[]>(`${this.env + '/list'}`);
-  }
 
   public filterAll(filter: Filter): Observable<M[]>{
     return this.http.post<M[]>(`${this.env + '/list'}`, filter);
