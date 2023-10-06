@@ -19,13 +19,12 @@ import { AddressService } from 'app/pages/registration/address/address.service';
 export class AppSelectAddressComponent implements ControlValueAccessor{
 
   @Output()
-  public modelChange: EventEmitter<Address | null> = new EventEmitter<Address | null>();
-
+  public ngModelChange: EventEmitter<Address | null> = new EventEmitter<Address | null>();
 
   public filter: AddressPageFilter = new AddressPageFilter()
   public page: Page<AddressPage>;
   public loading: boolean =  false;
-  private address: Address | null = null
+  public address: Address | null = null
 
   constructor(
     public service: AddressService,
@@ -42,7 +41,7 @@ export class AppSelectAddressComponent implements ControlValueAccessor{
   }
 
   onChanges(){
-    this.modelChange.emit(this.address);
+    this.ngModelChange.emit(this.address);
   }
 
 

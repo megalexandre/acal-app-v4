@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '@model/default/category';
@@ -27,7 +27,16 @@ export class LinkCreateComponent {
   public submmited: boolean = false;
   public form: FormGroup;
 
-  public disabledCustomerButton = true;
+  public currentActiveTab = 0;
+  private readonly customerTabIndex: number = 0;
+  private readonly categoryTabIndex: number = 1;
+  private readonly addressTabIndex: number = 2;
+  private readonly reviewTabIndex: number = 3;
+
+  public validCustomerTab = false;
+  public validCategoryTab = false;
+  public validAddressTab = false;
+  public disabledReviewButton = true;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -41,8 +50,27 @@ export class LinkCreateComponent {
 
   }
 
+  confirm(){
+    this.service.save(this.form.value).subscribe(
+      () => {
+        this.toastrService.success(`Sucesso`, `Novo Registro adicionado`)
+        this.router.navigate(['../list'],{relativeTo: this.activatedRoute})
+      },
+      (response) =>{
+        this.toastrService.danger(`Não foi possivel realizar a ação`, response.error.cause,)
+      }
+    )
+  }
+
+  back(){
+
+  }
+
   renderButtons(){
-    this.disabledCustomerButton = this.customer.invalid;
+    this.validCustomerTab = !this.customer.invalid;
+    this.validCategoryTab = !this.category.invalid;
+    this.validAddressTab = !this.address.invalid;
+    this.disabledReviewButton = this.form.invalid;
   }
 
   createForms(): void {
@@ -60,19 +88,23 @@ export class LinkCreateComponent {
   toCategoryTab(){
     this.customerTab.disabled = true;
     this.categoryTab.disabled = false;
+
     this.tabsetEl.selectTab(this.categoryTab)
+    this.currentActiveTab = this.categoryTabIndex;
   }
 
   toAddressTab(){
     this.categoryTab.disabled = true;
     this.addressTab.disabled = false;
     this.tabsetEl.selectTab(this.addressTab)
+    this.currentActiveTab = this.addressTabIndex;
   }
 
   toReviewTab(){
     this.addressTab.disabled = true;
     this.reviewTab.disabled = false;
     this.tabsetEl.selectTab(this.reviewTab)
+    this.currentActiveTab = this.reviewTabIndex;
   }
 
   setCustomer(customer: Customer | null){
@@ -85,6 +117,7 @@ export class LinkCreateComponent {
 
   setAddress(address: Address | null){
     this.address.setValue(address)
+    this.addressMail.setValue(address)
   }
 
   get customer(): AbstractControl {
@@ -97,6 +130,10 @@ export class LinkCreateComponent {
 
   get address(): AbstractControl {
     return this.form.get('address')
+  }
+
+  get addressMail(): AbstractControl {
+    return this.form.get('addressMail')
   }
 
 }

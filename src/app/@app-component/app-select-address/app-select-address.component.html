@@ -1,83 +1,95 @@
-<ngx-app-table [nbSpinner]="loading" [tableStriped]="true" class="border w-100" >
-  <thead>
-    <tr>
+<ng-container *ngIf="address === null">
+  <ngx-app-table [nbSpinner]="loading" [tableStriped]="true">
+    <thead>
+      <tr>
+        <th class="col-7 align-middle" (click)="order('area')">
+          Área:
+          <nb-icon *ngIf="filter.sort.field === 'area' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+          <nb-icon *ngIf="filter.sort.field === 'area' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+        </th>
 
-      <th class="col-8 align-middle" (click)="order('name')">
-          Nome:
-          <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
-          <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
-      </th>
-
-      <th class="col-3 align-middle" (click)="order('type')">
+        <th class="col-2 align-middle" (click)="order('number')">
           Número:
-          <nb-icon *ngIf="filter.sort.field === 'type' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
-          <nb-icon *ngIf="filter.sort.field === 'type' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
-      </th>
+          <nb-icon *ngIf="filter.sort.field === 'number' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+          <nb-icon *ngIf="filter.sort.field === 'number' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+        </th>
 
-      <th class="col-3 align-middle" (click)="order('total')">
+        <th class="col-2 align-middle" (click)="order('letter')">
           Letra:
-          <nb-icon *ngIf="filter.sort.field === 'total' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
-          <nb-icon *ngIf="filter.sort.field === 'total' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
-      </th>
+          <nb-icon *ngIf="filter.sort.field === 'letter' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+          <nb-icon *ngIf="filter.sort.field === 'letter' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+        </th>
 
-      <th class="col-1 align-middle" colspan="2">
-      </th>
-    </tr>
-  </thead>
+        <th class="col-1 align-middle" colspan="2">
+          <button nbButton outline status="basic" fullWidth (click)="create()">
+            <nb-icon icon="plus-outline"></nb-icon>
+          </button>
+        </th>
+      </tr>
+    </thead>
 
-  <!--
-  <thead>
-    <tr>
+    <thead>
+      <tr>
+        <th>
+          <app-select-area id="area" [(model)]="filter.area" (modelChange)="search()"></app-select-area>
+        </th>
 
-      <th>
-        <input type="text" nbInput placeholder="Nome" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.name">
-      </th>
+        <th>
+          <input type="text" nbInput placeholder="Número" fullWidth mask="0*" (keydown.enter)="search()" [(ngModel)]="filter.number" />
+        </th>
 
-      <th>
-      </th>
+        <th>
+          <input type="text" nbInput placeholder="Letra" mask="A*" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.letter" />
+        </th>
 
-      <th>
-      </th>
+        <th>
+          <button nbButton outline status="basic" type="button" fullWidth (click)="reset()">
+            <nb-icon icon="undo-outline"></nb-icon>
+          </button>
+        </th>
 
-      <th>
-        <button nbButton outline status="basic" type="button" fullWidth (click)="reset()">
-          <nb-icon icon="undo-outline"></nb-icon>
-        </button>
-      </th>
+        <th>
+          <button nbButton outline status="success" fullWidth (click)="search()">
+            <nb-icon icon="funnel-outline"></nb-icon>
+          </button>
+        </th>
+      </tr>
+    </thead>
 
-      <th>
-        <button nbButton outline status="success" fullWidth (click)="search()">
-          <nb-icon icon="funnel-outline"></nb-icon>
-        </button>
-      </th>
-    </tr>
+    <tbody>
+      <tr *ngFor="let item of page?.content">
+        <td class="align-middle"> <u class="btn btn-link" (click)="emit(item)">{{ item.area.name }}</u> </td>
+        <td class="align-middle"> <u class="btn btn-link" (click)="emit(item)">{{ item.number }} </u> </td>
+        <td class="align-middle"> <u class="btn btn-link" (click)="emit(item)">{{ item.letter }}</u> </td>
 
-  </thead>
-  -->
+        <td colspan="2" class="align-middle">
+          <button nbButton="nbButton" outline fullWidth status="basic" (click)="emit(item)">
+            <nb-icon icon="arrow-upward-outline"></nb-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </ngx-app-table>
+</ng-container>
 
-
-  <tbody >
-    <tr *ngFor="let item of page?.content">
-      <td class="align-middle">{{item | json}}</td>
-      <td class="align-middle">{{item }}</td>
-      <td class="align-middle">{{item }}</td>
-
-      <td colspan="2" class="align-middle">
-        <button nbButton outline status="basic" fullWidth (click)="emit(item)">
-          <nb-icon icon="arrow-upward-outline"></nb-icon>
-        </button>
-      </td>
-
-    </tr>
-  </tbody>
-
-  <tfoot>
-    <tr>
-      <td colspan="4" *ngIf="page">
-        <ngx-app-table-footer [page]="page" (search)="paginate($event)">
-        </ngx-app-table-footer>
-      </td>
-    </tr>
-  </tfoot>
-
-</ngx-app-table>
+<ng-container *ngIf="address !== null">
+  <ngx-app-table [tableStriped]="true" class="w-100">
+    <tbody>
+      <tr>
+        <td class="col-11 align-middle">
+          <b>
+            {{ address.area.name }}
+            {{ address.number }}
+            {{ address.letter }}
+          </b>
+        </td>
+        <td class="col-1 align-middle">
+          <button nbButton="nbButton" outline status="basic" (click)="remove()">
+            Remover
+            <nb-icon icon="person-remove-outline"></nb-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </ngx-app-table>
+</ng-container>

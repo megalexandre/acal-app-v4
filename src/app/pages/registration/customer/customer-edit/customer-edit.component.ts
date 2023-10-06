@@ -63,7 +63,6 @@ export class CustomerEditComponent extends CustomerComponent implements OnInit {
     })
 
     this.form.addControl('id', this.formBuilder.control(customer.id));
-
   }
 
   public override commit(): void {

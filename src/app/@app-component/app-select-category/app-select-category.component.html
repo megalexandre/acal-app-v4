@@ -1,80 +1,96 @@
-<ngx-app-table [nbSpinner]="loading" [tableStriped]="true" class="border w-100" >
-  <thead>
-    <tr>
-
-      <th class="col-8 align-middle" (click)="order('name')">
+<ng-container *ngIf="category === null">
+  <ngx-app-table [nbSpinner]="loading" [tableStriped]="true" class="w-100">
+    <thead>
+      <tr>
+        <th class="col-6 align-middle" (click)="order('name')">
           Nome:
           <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
           <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
-      </th>
+        </th>
 
-      <th class="col-3 align-middle" (click)="order('type')">
+        <th class="col-3 align-middle" (click)="order('type')">
           Categoria:
           <nb-icon *ngIf="filter.sort.field === 'type' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
           <nb-icon *ngIf="filter.sort.field === 'type' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
-      </th>
+        </th>
 
-      <th class="col-3 align-middle" (click)="order('total')">
+        <th class="col-3 align-middle" (click)="order('total')">
           Valor:
           <nb-icon *ngIf="filter.sort.field === 'total' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
           <nb-icon *ngIf="filter.sort.field === 'total' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
-      </th>
+        </th>
 
-      <th class="col-1 align-middle" colspan="2">
-      </th>
-    </tr>
-  </thead>
+        <th class="col-1 align-middle" colspan="2"></th>
+      </tr>
+    </thead>
 
-  <thead>
-    <tr>
+    <thead>
+      <tr>
+        <th>
+          <input type="text" nbInput="nbInput" fullWidth placeholder="Nome" (keydown.enter)="search()" [(ngModel)]="filter.name" />
+        </th>
 
-      <th>
-        <input type="text" nbInput placeholder="Nome" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.name">
-      </th>
+        <th>
+          <app-category-type [(model)]="filter.type" (modelChange)="search()"></app-category-type>
+        </th>
 
-      <th>
-        <app-category-type [(model)]="filter.type" (modelChange)="search()"></app-category-type>
-      </th>
+        <th>
+          <app-currency [(model)]="filter.total" placeholder="Total" (keydown.enter)="search()"></app-currency>
+        </th>
 
-      <th>
-      </th>
+        <th>
+          <button nbButton="nbButton" outline status="basic" type="button" (click)="reset()">
+            <nb-icon icon="undo-outline"></nb-icon>
+          </button>
+        </th>
 
-      <th>
-        <button nbButton outline status="basic" type="button" fullWidth (click)="reset()">
-          <nb-icon icon="undo-outline"></nb-icon>
-        </button>
-      </th>
+        <th>
+          <button nbButton="nbButton" outline status="success" type="button" (click)="search()">
+            <nb-icon icon="funnel-outline"></nb-icon>
+          </button>
+        </th>
+      </tr>
+    </thead>
 
-      <th>
-        <button nbButton outline status="success" fullWidth (click)="search()">
-          <nb-icon icon="funnel-outline"></nb-icon>
-        </button>
-      </th>
-    </tr>
-  </thead>
+    <tbody>
+      <tr *ngFor="let item of page?.content">
+        <td class="align-middle"><u class="btn btn-link" (click)="emit(item)">{{ item.name }} </u></td>
+        <td class="align-middle"><u class="btn btn-link" (click)="emit(item)">{{ item.type | categoryType }} </u>   </td>
+        <td class="align-middle"><u class="btn btn-link" (click)="emit(item)">{{ item.total | currency }} </u></td>
 
-  <tbody >
-    <tr *ngFor="let item of page?.content">
-      <td class="align-middle">{{item.name}}</td>
-      <td class="align-middle">{{item.type | categoryType}}</td>
-      <td class="align-middle">{{item.total | currency}}</td>
+        <td colspan="2" class="align-middle">
+          <button nbButton="nbButton" type="button" outline fullWidth status="basic" (click)="emit(item)">
+            <nb-icon icon="arrow-upward-outline"></nb-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
 
-      <td colspan="2" class="align-middle">
-        <button nbButton outline status="basic" fullWidth (click)="emit(item)">
-          <nb-icon icon="arrow-upward-outline"></nb-icon>
-        </button>
-      </td>
+    <tfoot>
+      <tr>
+        <td colspan="4" *ngIf="page">
+          <ngx-app-table-footer [page]="page" (search)="paginate($event)"></ngx-app-table-footer>
+        </td>
+      </tr>
+    </tfoot>
+  </ngx-app-table>
+</ng-container>
 
-    </tr>
-  </tbody>
-
-  <tfoot>
-    <tr>
-      <td colspan="4" *ngIf="page">
-        <ngx-app-table-footer [page]="page" (search)="paginate($event)">
-        </ngx-app-table-footer>
-      </td>
-    </tr>
-  </tfoot>
-
-</ngx-app-table>
+<ng-container *ngIf="category !== null">
+  <ngx-app-table [tableStriped]="true" class="w-100">
+    <tbody>
+      <tr>
+        <td class="col-11 align-middle">
+          {{ category.type | categoryType }} {{ category.name }}:
+          <b>{{ category.total | currency }}</b>
+        </td>
+        <td class="col-1 align-middle">
+          <button nbButton="nbButton" type="button" outline status="basic" (click)="remove()">
+            Remover
+            <nb-icon icon="person-remove-outline"></nb-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </ngx-app-table>
+</ng-container>

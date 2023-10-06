@@ -1,48 +1,49 @@
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-
       <nb-card-header>
-        {{ form.value | json }}
+        customer: {{ form.get('customer').value | json }} <br/>
+        category: {{ form.get('category').value | json }} <br/>
       </nb-card-header>
 
       <nb-card-body>
-        <form [formGroup]="form">
           <nb-tabset fullWidth #createlink>
 
-          <nb-tab tabTitle="Úsuario" responsive #customer>
+            <nb-tab #customer  tabTitle="Úsuario" [badgeText]="validCustomerTab ? 'OK' : ''" [badgeStatus]="validCustomerTab ? 'success' : 'basic'" badgePosition="center start">
               <p><strong>Selecione o Úsuario:</strong></p>
-              <app-select-customer (ngModelChange)="setCustomer($event); renderButtons()"></app-select-customer>
+
+              <app-select-customer (ngModelChange)="setCustomer($event);" (ngModelChange)="renderButtons()"></app-select-customer>
+
+              <div class="d-flex justify-content-between">
+                <button type="button" nbButton outline status="basic" (click)="back()">Voltar</button>
+                <button type="button" #firstTabButton nbButton outline status="success" [disabled]="!validCustomerTab" (click)="toCategoryTab()">Avançar</button>
+              </div>
             </nb-tab>
 
-            <nb-tab tabTitle="Categoria" responsive #category disabled="true">
-              <p>List of <strong>orders</strong>.</p>
+            <nb-tab tabTitle="Categoria" #category [badgeText]="validCategoryTab ? 'OK' : ''" [badgeStatus]="validCategoryTab ? 'success' : 'basic'" badgePosition="center start">
+                <app-select-category (ngModelChange)="setCategory($event);" (ngModelChange)="renderButtons()"></app-select-category>
+
+                <div class="d-flex justify-content-between">
+                  <button type="button" nbButton outline status="basic" (click)="back()">Voltar</button>
+                  <button type="button" #firstTabButton nbButton outline status="success" [disabled]="!validCategoryTab" (click)="toAddressTab()">Avançar</button>
+                </div>
             </nb-tab>
 
-            <nb-tab tabTitle="Endereço" responsive #address disabled="true">
-              <p>List of <strong>orders</strong>.</p>
+            <nb-tab tabTitle="Endereço" [badgeText]="validAddressTab ? 'OK' : ''" [badgeStatus]="validAddressTab ? 'success' : ''" #address disabled="true">
+
+              <app-select-address (ngModelChange)="setAddress($event);" (ngModelChange)="renderButtons()"></app-select-address>
+
+              <div class="d-flex justify-content-between">
+                <button type="button" nbButton outline status="basic" (click)="back()">Voltar</button>
+                <button type="button" #firstTabButton nbButton outline status="success" [disabled]="!validAddressTab" (click)="toReviewTab()">Avançar</button>
+              </div>
             </nb-tab>
 
-            <nb-tab tabTitle="Revisão" responsive #review disabled="true">
-              <p>List of <strong>orders</strong>.</p>
+            <nb-tab tabTitle="Revisão" #review disabled="true">
+              <button type="button" nbButton outline status="success" (click)="confirm()">Salvar</button>
             </nb-tab>
+
           </nb-tabset>
-
-
-          <div class="d-flex justify-content-between">
-
-            <button type="button" nbButton outline status="basic">
-              Voltar
-            </button>
-
-            <button type="button" #firstTabButton nbButton outline status="success" [disabled]="disabledCustomerButton" (click)="toCategoryTab()" >
-              Avançar
-            </button>
-
-          </div>
-
-        </form>
-
       </nb-card-body>
     </nb-card>
   </div>

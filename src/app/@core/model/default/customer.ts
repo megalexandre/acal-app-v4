@@ -42,6 +42,7 @@ export interface CustomerPage {
   id: string,
   name: string,
   documentNumber: string,
+  membershipNumber?: string,
 }
 
 export interface CustomerFilter {

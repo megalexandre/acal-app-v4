@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbButtonModule, NbCardModule, NbCheckboxModule, NbFormFieldModule, NbIconModule, NbInputModule, NbSpinnerModule, NbStepperModule, NbTabsetModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbCheckboxModule, NbFormFieldModule, NbIconModule, NbInputModule, NbSpinnerModule, NbStepperModule, NbTabsetModule, NbTooltipModule } from '@nebular/theme';
 import { AcalModule } from 'app/@acal/acal.module';
 import { AppComponentModule } from 'app/@app-component/app-component.module';
 import { DirectiveModule } from 'app/@directive/directive.module';
@@ -37,6 +37,7 @@ import { LinkService } from './link.service';
     AppComponentModule,
     NbStepperModule,
     NbTabsetModule,
+    NbTooltipModule,
   ],
   declarations: [
     LinkComponent,
