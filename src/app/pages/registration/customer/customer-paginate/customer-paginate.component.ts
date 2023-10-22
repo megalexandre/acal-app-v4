@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Action, ListComponent } from '@core/list.component';
-import { CustomerPage, CustomerPageFilter, PersonType } from '@model/default/customer';
+import { CustomerPage, CustomerPageFilter, PersonType } from 'app/pages/registration/customer/customer.model/customer';
 import { Page } from '@model/page';
 import { DataService } from 'app/@shared/data.service';
 import { CustomerService } from '../customer.service';

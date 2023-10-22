@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { Customer, CustomerFilter, CustomerPage, CustomerPageFilter } from '@model/default/_index';
+import { Customer, CustomerFilter, CustomerPage, CustomerPageFilter } from 'app/pages/registration/customer/customer.model/_index';
 import { DefaultService } from 'app/@shared/default.service';
 
 @Injectable()

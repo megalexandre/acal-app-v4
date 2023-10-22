@@ -1,4 +1,4 @@
-import { PageFilter } from "./page-filter";
+import { PageFilter, Sort } from "./page-filter";
 
 export interface Area {
   id: string,
@@ -18,6 +18,11 @@ export interface AreaPage {
 export class AreaPageFilter extends PageFilter {
   id?: string = null;
   name?: string = null;
+
+  sort?: Sort = {
+    field: "name",
+    direction: "ASC"
+  };
 
   reset(){
     super.reset();

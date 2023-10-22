@@ -34,7 +34,7 @@ export class CustomerCreateComponent extends CustomerComponent implements OnInit
         this.router.navigate(['../list'],{relativeTo: this.activatedRoute})
       },
       (response) =>{
-        this.toastrService.danger(response.error.detail, `Não foi possivel realizar a ação`)
+        this.toastrService.danger(`Não foi possivel realizar a ação`, response.error.message)
       }
 
     )

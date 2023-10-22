@@ -54,4 +54,7 @@ export abstract class DefaultService <
     return this.http.post<M>(`${this.env}`, model);
   }
 
+  public saveAll(model: M[]): Observable<M[]>{
+    return this.http.post<M[]>(`${this.env}`, model);
+  }
 }

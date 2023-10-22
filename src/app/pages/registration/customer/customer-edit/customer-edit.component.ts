@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Customer } from '@model/default/customer';
+import { Customer } from 'app/pages/registration/customer/customer.model/customer';
 import { NbToastrService } from '@nebular/theme';
 import { DataService } from 'app/@shared/data.service';
 import { CustomerComponent } from '../customer.component';

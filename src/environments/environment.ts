@@ -13,6 +13,7 @@ export const environment = {
   book: `${baseUrl + 'book'}`,
   hydrometer: `${baseUrl + 'hydrometer'}`,
   quality: `${baseUrl + 'quality'}`,
+  proposal: `${baseUrl + 'proposal'}`,
   customer: `${baseUrl + 'customer'}`,
   category: `${baseUrl + 'category'}`,
   user: `${baseUrl + 'user'}`,

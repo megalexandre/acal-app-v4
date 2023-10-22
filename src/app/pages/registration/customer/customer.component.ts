@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PhoneNumber } from '@model/default/customer';
+import { PhoneNumber } from 'app/pages/registration/customer/customer.model/customer';
 import { NbToastrService } from '@nebular/theme';
 import DateValidator from 'app/@validator/date.validator';
 import DocumentValidator from 'app/@validator/document.validator';
 import { phoneNumberPreferentialValidator } from 'app/@validator/phone-number-list.validator';
 import { CustomerService } from './customer.service';
+import { StatusComponent } from '@model/default/status';
 
 @Component({
   selector: 'ngx-customer',
@@ -78,7 +79,7 @@ export class CustomerComponent {
 
   public commit(){}
 
-  public setDate(date: string){
+  public setBirthDay(date: Date | null){
     this.birthDay.setValue(date);
   }
 
@@ -91,7 +92,7 @@ export class CustomerComponent {
     this.router.navigate(['../list'],{relativeTo: this.activatedRoute})
   }
 
-  public getStatus(value: string): ('success'|'basic'|'danger') {
+  public getStatus(value: string): StatusComponent {
 
     if(this.form.get(value).valid && (this.form.get(value).touched || (this.submmited) )){
       return 'success'

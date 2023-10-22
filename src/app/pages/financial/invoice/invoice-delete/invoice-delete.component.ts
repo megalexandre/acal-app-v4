@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Customer } from 'app/pages/registration/customer/customer.model/customer';
+import { Invoice } from '@model/default/_index';
 import { NbToastrService } from '@nebular/theme';
 import { DataService } from 'app/@shared/data.service';
-import { CustomerComponent } from '../customer.component';
-import { CustomerService } from '../customer.service';
+import { InvoiceComponent } from '../invoice.component';
+import { InvoiceService } from '../invoice.service';
 
 @Component({
-  selector: 'ngx-customer-delete',
-  templateUrl: './customer-delete.component.html',
+  templateUrl: './area-delete.component.html',
 })
-export class CustomerDeleteComponent extends CustomerComponent implements OnInit  {
+export class InvoiceDeleteComponent extends InvoiceComponent implements OnInit  {
 
-  public customer: Customer;
+  public title = "Deletar Área"
+  public area: Invoice;
   public id: string;
   public loaded: boolean = false;
 
   constructor(
     public data: DataService,
-    public service: CustomerService,
+    public service: InvoiceService,
     public formBuilder: FormBuilder,
     public activatedRoute: ActivatedRoute,
     public router: Router,
@@ -35,8 +35,8 @@ export class CustomerDeleteComponent extends CustomerComponent implements OnInit
     }
 
     this.service.getById(this.id).subscribe(
-      (customer: Customer)=> {
-        this.customer = customer;
+      (area: Invoice)=> {
+        this.area = area;
         this.loaded = true
 
       }

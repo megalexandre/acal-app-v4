@@ -15,6 +15,7 @@ import { AppSelectCustomerComponent } from './app-select-customer/app-select-cus
 import { AppSelectCategoryComponent } from './app-select-category/app-select-category.component';
 import { CategoryService } from 'app/pages/registration/category/category.service';
 import { AppSelectAddressComponent } from './app-select-address/app-select-address.component';
+import { AppReferenceComponent } from './app-reference/app-reference.component';
 
 const APP_COMPONENTS = [
   AppDateComponent,
@@ -25,6 +26,7 @@ const APP_COMPONENTS = [
   AppSelectCustomerComponent,
   AppSelectCategoryComponent,
   AppSelectAddressComponent,
+  AppReferenceComponent,
 ];
 
 @NgModule({

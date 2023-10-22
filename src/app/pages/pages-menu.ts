@@ -6,12 +6,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'file-text-outline',
     children: [
       {
-        title: 'Ligações',
-        link: '/pages/registration/link',
-      },
-      {
         title: 'Clientes',
-        link: '/pages/registration/customer/paginate',
+        link: '/pages/registration/customer',
       },
       {
         title: 'Categorias',
@@ -24,6 +20,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Endereços',
         link: '/pages/registration/address',
+      },
+    ]
+  },
+  {
+    title: 'Financeiro',
+    icon: 'book-open-outline', 
+    children: [
+      {
+        title: 'Pagamentos',
+        link: '/pages/financial',
+      },
+      {
+        title: 'Ligações',
+        link: '/pages/registration/link',
       },
     ]
   },

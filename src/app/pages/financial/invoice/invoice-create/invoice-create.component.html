@@ -1,0 +1,121 @@
+
+  <form [formGroup]="form" (submit)="submit()" *ngIf="!proposals">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <nb-card>
+
+          <nb-card-header>
+            {{title}}
+          </nb-card-header>
+
+          <nb-card-body>
+
+            <div class="row mb-3">
+
+              <div class="col-3">
+                <label for="name" class="label">Refencia:</label><br/>
+                <app-reference formControlName="reference" ></app-reference>
+                <error-message [message]="'Nome é obrigatório'"></error-message>
+              </div>
+
+              <div class="col-3 offset-md-6 align-self-end">
+                <button type="submit" fullWidth nbButton outline status="info">
+                  <nb-icon icon="search-outline"></nb-icon>
+                </button>
+              </div>
+
+            </div>
+
+          </nb-card-body>
+
+          <nb-card-footer>
+
+            <div class="d-flex justify-content-between">
+              <button type="button" nbButton outline status="basic" (click)="back()">
+                <nb-icon icon="arrow-back-outline"></nb-icon>
+              </button>
+
+          
+            </div>
+          </nb-card-footer>
+
+        </nb-card>
+
+      </div>
+
+    </div>
+  </form>
+
+<nb-card *ngIf="proposals">
+
+  <nb-card-body>
+
+    <ngx-app-table [nbSpinner]="loading" [tableStriped]="false">
+
+      <thead>
+        <tr>
+
+          <th>
+            Responsável:
+          </th>
+      
+          <th class="align-middle text-center">
+            Número:
+          </th>
+      
+          <th class="align-middle text-center">
+            Valor:
+          </th>
+
+          <th class="align-middle text-center">
+            Selecionar:
+          </th>
+
+        </tr>
+      </thead>
+
+      <tbody >
+        <ng-container *ngFor="let proposal of proposals">
+
+          <tr [ngClass]="proposal.selected ? 'bg-success' : 'table-primary'" >
+            <td class="col-9 text-center align-middle" colspan="2"> {{proposal.area}} </td>
+            <td class="col-2 text-center align-middle"> {{totalValueByProposal(proposal) | currency}} </td>
+
+            <td class="align-middle text-center col-1"  > 
+              <nb-checkbox [status]="proposal.selected ? 'success' : 'primary' " (checkedChange)="toggleProposal(proposal)"  [checked]="proposal.selected" ></nb-checkbox> 
+            </td>
+          </tr>
+
+          <tr *ngFor="let invoice of proposal.invoices" [ngClass]="invoice.selected ? 'table-success' : 'table-ligth'">
+            <td class="align-middle"> {{invoice.linkDetail.customer}} </td>
+            <td class="align-middle text-center"> {{invoice.addressName}} </td>
+            <td class="align-middle text-center"> {{invoice.total | currency }} </td>
+            <td class="align-middle text-center"> 
+              <nb-checkbox [status]="proposal.selected ? 'success' : 'primary' " (checkedChange)="toggleInvoice(invoice, proposal)" [checked]="invoice.selected"></nb-checkbox>
+            </td>
+          </tr>
+            
+        </ng-container>
+
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td class="col-8 text-center align-middle"></td>
+          <td class="col-1 text-center align-middle"><b>Total</b></td>
+          <td class="col-1 text-center align-middle"> {{totalValueSelected() | currency }} </td>
+          <td class="align-middle text-center col-2">
+            <button type="button" fullWidth nbButton outline status="basic" (click)="confirm()">
+              Confirmar<nb-icon icon="checkmark-circle-2-outline"></nb-icon>
+            </button>
+          </td>
+        </tr>
+
+            
+      </tfoot>
+    </ngx-app-table>
+
+  </nb-card-body>
+
+</nb-card>

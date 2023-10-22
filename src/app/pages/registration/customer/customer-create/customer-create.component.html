@@ -4,7 +4,7 @@
       <nb-card>
 
         <nb-card-header>
-          {{title}}
+          {{form.value | json}}
         </nb-card-header>
 
         <nb-card-body>
@@ -46,7 +46,7 @@
 
               <div [ngClass]="personTypeValue === 'INDIVIDUAL'? 'col-xl-4 col-12':'col-xl-6 col-12'" >
                 <label for="birthDay" class="label">Data de Nascimento:</label>
-                <app-date [submmited]="submmited" formControlName="birthDay"></app-date>
+                <app-date [submmited]="submmited" (ngModelChange)="setBirthDay($event)" ></app-date>
               </div>
             </div>
 

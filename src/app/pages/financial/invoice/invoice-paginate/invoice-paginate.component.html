@@ -10,22 +10,16 @@
       <thead>
         <tr>
 
-          <th class="col-5 align-middle" (click)="order('name')">
-              Nome:
-              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
-              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+          <th class="col-6 align-middle" (click)="order('name')">
+            Nome:
           </th>
 
           <th class="col-3 align-middle" (click)="order('name')">
-              categoria:
-              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
-              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+            Endereço:
           </th>
 
-          <th class="col-3 align-middle" (click)="order('name')">
-              Endereço:
-              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
-              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+          <th class="col-2 align-middle" (click)="order('name')">
+            Valor:
           </th>
 
           <th class="col-1 align-middle" colspan="2">
@@ -40,14 +34,12 @@
         <tr>
 
           <th>
-            <input id="name" type="text" nbInput fullWidth placeholder="Nome:" >
           </th>
-
+      
           <th>
           </th>
-
+      
           <th>
-            <app-select-area [(ngModel)]="filter.area"></app-select-area>
           </th>
 
           <th>
@@ -64,20 +56,11 @@
         </tr>
       </thead>
 
-      <tbody>
+      <tbody >
         <tr *ngFor="let item of page?.content">
-
-          <td class="align-middle" [nbTooltip]='(item.customerDocument | identification)' nbTooltipStatus="basic">
-            {{item.customerName}}
-          </td>
-
-          <td class="align-middle" [nbTooltip]='(item.categoryTotal | currency)' nbTooltipStatus="basic">
-            {{item.categoryName}} {{item.categoryType | categoryType}}
-          </td>
-
-          <td class="align-middle" [nbTooltip]='(item.addressDetail)' nbTooltipStatus="basic">
-            {{item.addressName}}
-          </td>
+          <td class="align-middle"> </td>
+          <td class="align-middle"> </td>
+          <td class="align-middle"> </td>
 
           <td class="align-middle">
             <button nbButton outline status="warning" fullWidth (click)="edit(item.id)">
@@ -92,12 +75,11 @@
           </td>
 
         </tr>
-       
       </tbody>
 
       <tfoot>
         <tr>
-          <td colspan="7" *ngIf="page">
+          <td colspan="3" *ngIf="page">
             <ngx-app-table-footer [page]="page" (search)="paginate($event)">
             </ngx-app-table-footer>
           </td>

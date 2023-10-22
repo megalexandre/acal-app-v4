@@ -1,4 +1,5 @@
-import { Address, Area, Category, Customer } from "./_index";
+import { Customer } from "app/pages/registration/customer/customer.model/customer";
+import { Address, Area, Category } from "./_index";
 import { PageFilter } from "./page-filter";
 
 export interface Link {

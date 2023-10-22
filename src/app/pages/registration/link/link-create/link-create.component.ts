@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '@model/default/category';
-import { Customer } from '@model/default/customer';
+import { Customer } from 'app/pages/registration/customer/customer.model/customer';
 import { NbTabComponent, NbTabsetComponent, NbToastrService } from '@nebular/theme';
 import { Address } from 'cluster';
 import { LinkService } from '../link.service';

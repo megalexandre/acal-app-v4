@@ -1,8 +1,11 @@
 import { Link } from "./_index";
+import { PageFilter } from "./page-filter";
+import { Reference } from "./reference";
+
 
 export interface Invoice {
   id?: string,
-  reference: string,
+  reference: Reference,
   link?: Link,
   linkId: string,
   dueDate: string,
@@ -57,7 +60,7 @@ export interface InvoiceFilter {
 
 }
 
-export class InvoicePageFilter {
+export class InvoicePageFilter extends PageFilter {
 
     id?: string = null;
     reference?: string = null;
@@ -66,12 +69,8 @@ export class InvoicePageFilter {
     customerName: string = null;
     address: any = null;
 
-    page: number = 0;
-    pageSize: number = 10;
-    direction: string = 'ASC';
-    sortedField: string = 'id';
-
     reset(){
+      super.reset();
       this.id = null;
       this.reference = null;
       this.address = null,
@@ -80,4 +79,32 @@ export class InvoicePageFilter {
       this.customerName = null;
     }
 
+}
+
+
+
+
+
+export interface CreateInvoice{
+  reference: string,
+  emission: Date,
+  dueDate: Date,
+  linkDetail: CreateLinkDetail,
+  invoiceDetails:CreateInvoiceDetail[],
+}
+
+export interface CreateInvoiceResponse{
+  id: string,
+}
+
+
+export interface CreateLinkDetail{
+  linkId: String,
+  customer: String
+}
+
+export interface CreateInvoiceDetail{
+  reason: String,
+  value: number,
+  dataPaid: Date,
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Customer, CustomerPageFilter } from '@model/default/customer';
+import { Customer, CustomerPageFilter } from 'app/pages/registration/customer/customer.model/customer';
 import { Page } from '@model/page';
 import { CustomerService } from 'app/pages/registration/customer/customer.service';
 

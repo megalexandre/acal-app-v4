@@ -1,4 +1,32 @@
-import { PageFilter } from "./page-filter";
+import { PageFilter, Sort } from "@model/default/page-filter";
+
+export interface CustomerPage {
+  id: string,
+  name: string,
+  documentNumber: string,
+}
+
+export class CustomerPageFilter extends PageFilter {
+  id?: string = null;
+  name?: string =  null;
+  documentNumber?: string  = null;
+  active?: boolean = null;
+  personType?: PersonType = null;
+
+  sort?: Sort = {
+    field: "name",
+    direction: "ASC"
+  };
+  
+  reset(){
+    super.reset()
+    this.id = null;
+    this.name = null;
+    this.documentNumber = null;
+    this.active = null;
+    this.personType = null;
+  }
+}
 
 export interface Customer {
   id: string,
@@ -21,28 +49,10 @@ export interface PersonType {
   name: 'INDIVIDUAL'|'LEGAL'
 }
 
-export class CustomerPageFilter extends PageFilter {
-  id?: string = null;
-  name?: string =  null;
-  documentNumber?: string  = null;
-  active?: boolean = null;
-  personType?: PersonType = null;
-
-  reset(){
-    super.reset()
-    this.id = null;
-    this.name = null;
-    this.documentNumber = null;
-    this.active = null;
-    this.personType = null;
-  }
-}
-
 export interface CustomerPage {
   id: string,
   name: string,
   documentNumber: string,
-  membershipNumber?: string,
 }
 
 export interface CustomerFilter {
