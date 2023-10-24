@@ -57,8 +57,14 @@ export class CategoryPageFilter extends PageFilter {
   }
 }
 
-
-
-
+export function createCategoryFilter(): CategoryFilter {
+  return {
+    id: null,
+    name: null,
+    waterValue: null,
+    categoryValue: null,
+    type: null,
+  };
+}
 
 

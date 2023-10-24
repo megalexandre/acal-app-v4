@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card accent="basic">
 
   <nb-card-header>
     {{title}}
@@ -10,14 +10,14 @@
       <thead>
         <tr>
 
-          <th class="col-5 align-middle" (click)="order('name')">
+          <th class="col-5 align-middle" (click)="order('customer.name')">
               Nome:
               <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
               <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
 
           <th class="col-3 align-middle" (click)="order('name')">
-              categoria:
+              Categoria:
               <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
               <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
@@ -40,14 +40,15 @@
         <tr>
 
           <th>
-            <input id="name" type="text" nbInput fullWidth placeholder="Nome:" >
+            <input id="name"  [(ngModel)]="filter.customer.name" (keydown.enter)="search()" type="text" nbInput fullWidth placeholder="Nome:" >
           </th>
 
           <th>
+            <app-select-category></app-select-category>
           </th>
 
           <th>
-            <app-select-area [(ngModel)]="filter.area"></app-select-area>
+            <app-select-area ></app-select-area>
           </th>
 
           <th>

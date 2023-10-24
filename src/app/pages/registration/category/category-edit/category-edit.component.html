@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <nb-card>
+      <nb-card accent="warning">
 
         <nb-card-header>
           {{title}}
@@ -12,13 +12,13 @@
 
           <div class="row mb-3">
 
-            <div class="col-md-6 col-12">
+            <div class="col-md-4 col-12">
               <label for="type" class="label">Tipo:</label>
               <app-category-type formControlName="type" [submmited]="submmited"> </app-category-type>
               <error-message [message]="'Tipo é obrigatório'" [show]="(type.errors?.required && (submmited || this.form.touched))"></error-message>
             </div>
 
-            <div class="col-md-6 col-12">
+            <div class="col-md-8 col-12">
                <label for="name" class="label">Nome:</label>
                <input id="name" type="text" nbInput fullWidth placeholder="Nome:" formControlName="name"  [status]="submmited ? getStatus('name') : 'basic' ">
                <error-message [message]="'Nome é obrigatório'" [show]="(name.errors?.required && (submmited || this.form.touched))"></error-message>

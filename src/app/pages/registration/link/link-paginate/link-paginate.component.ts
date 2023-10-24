@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaginateComponent } from '@core/paginate.component';
-import { LinkPage, LinkPageFilter } from '@model/default/link';
+import { LinkPage, LinkPageFilter } from 'app/pages/registration/link/link.model/link';
 import { Page } from '@model/page';
 import { DataService } from 'app/@shared/data.service';
 import { LinkService } from '../link.service';

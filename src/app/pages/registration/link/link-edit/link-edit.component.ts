@@ -5,7 +5,7 @@ import { NbToastrService } from '@nebular/theme';
 import { DataService } from 'app/@shared/data.service';
 import { LinkComponent } from '../link.component';
 import { LinkService } from '../link.service';
-import { Link } from '@model/default/link';
+import { Link } from 'app/pages/registration/link/link.model/link';
 
 @Component({
   templateUrl: './link-edit.component.html',

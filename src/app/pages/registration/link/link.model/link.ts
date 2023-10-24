@@ -1,6 +1,8 @@
-import { Customer } from "app/pages/registration/customer/customer.model/customer";
-import { Address, Area, Category } from "./_index";
-import { PageFilter } from "./page-filter";
+import { Address } from "@model/default/address";
+import { Area } from "@model/default/area";
+import { Category, CategoryFilter, createCategoryFilter } from "@model/default/category";
+import { PageFilter } from "@model/default/page-filter";
+import { Customer, CustomerFilter, createCustomerFilter } from "app/pages/registration/customer/customer.model/customer";
 
 export interface Link {
   id: string,
@@ -36,13 +38,14 @@ export interface LinkPage {
   addressName: String,
   addressDetail: String,
 }
+
 export class LinkPageFilter extends PageFilter {
   id?: string = null;
-  category?: Category= null;
+  customer?: CustomerFilter = createCustomerFilter();
+  category?: CategoryFilter = createCategoryFilter();
   address?: Address = null;
   area?: Area = null;
   mailAddress?: Address = null;
-  customer?: Customer = null;
   active?: Boolean = null;
   startedAt?: string = null;
   finishedAt?: string = null;
@@ -51,11 +54,11 @@ export class LinkPageFilter extends PageFilter {
   reset(){
     super.reset();
     this.id = null;
-    this.category = null;
+    this.customer = createCustomerFilter();
+    this.category = createCategoryFilter();
     this.address = null;
     this.area = null;
     this.mailAddress = null;
-    this.customer = null;
     this.active = null;
     this.startedAt = null;
     this.finishedAt = null;

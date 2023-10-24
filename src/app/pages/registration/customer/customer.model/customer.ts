@@ -3,6 +3,7 @@ import { PageFilter, Sort } from "@model/default/page-filter";
 export interface CustomerPage {
   id: string,
   name: string,
+  membershipNumber: string,
   documentNumber: string,
 }
 
@@ -60,4 +61,9 @@ export interface CustomerFilter {
   document: string,
 }
 
-
+export function createCustomerFilter(): CustomerFilter {
+  return {
+    name: null,
+    document: null,
+  };
+}
