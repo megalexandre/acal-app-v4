@@ -33,7 +33,6 @@ export abstract class DefaultService <
     return this.http.post<Page<ModelPage>>(`${this.env+'/paginate'}`, filterPage);
   }
 
-
   public filterAll(filter: Filter): Observable<M[]>{
     return this.http.post<M[]>(`${this.env + '/list'}`, filter);
   }

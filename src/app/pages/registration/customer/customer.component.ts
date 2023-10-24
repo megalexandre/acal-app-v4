@@ -32,7 +32,7 @@ export class CustomerComponent {
       name: [null, Validators.required],
       documentNumber: [null, [Validators.required, DocumentValidator.valid() ]],
       personType: ["INDIVIDUAL"],
-      birthDay: [null, [DateValidator.valid()]],
+      birthDay: [null],
       membershipNumber: [null, Validators.required],
       phoneNumbers: this.formBuilder.array([], phoneNumberPreferentialValidator()),
     })
@@ -86,7 +86,6 @@ export class CustomerComponent {
   public setBirthDayTouched(){
     this.birthDay.markAllAsTouched()
   }
-
 
   public back(){
     this.router.navigate(['../list'],{relativeTo: this.activatedRoute})

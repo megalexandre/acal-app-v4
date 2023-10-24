@@ -34,7 +34,7 @@ export interface Customer {
   documentNumber: string,
   phoneNumbers: PhoneNumber[],
   personType: PersonType,
-  birthDay: string,
+  birthDay: Date,
   membershipNumber?: string,
   active: boolean,
 }

@@ -1,22 +1,21 @@
 import { Component, DoCheck, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { StatusComponent } from '@model/default/status';
-import { parse, isValid, format } from "date-fns";
-import { stat } from 'fs';
+import { format, isValid, parse, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-date',
-  template: `{{submmited}} 
-    {{status}}
+  template: `
     <input
       nbInput
       fullWidth
       mask="00/00/0000"
       type="text"
+      (click)="setSubmmited()"
       [status]="status"
       [placeholder]="placeHolder"
       [dropSpecialCharacters]="true"
-      [(ngModel)]="ngModel"
+      [(ngModel)]="_dateAsStrting"
       (ngModelChange)="onModelChanges($event)"
       >`,
   providers: [
@@ -28,16 +27,31 @@ import { stat } from 'fs';
   ]
 })
 export class AppDateComponent implements ControlValueAccessor, DoCheck {
+
   @Input() public placeHolder: string = "Data:";
   @Input() public submmited?: boolean = false;
-  @Input() public ngModel: Date | null = new Date();
+  @Input() public ngModel: Date | null = null;
   @Output() public ngModelChange = new EventEmitter<Date | null>();
+
+  public _dateAsStrting: String = ""
 
   public disabled: boolean = false;
   public status: StatusComponent = 'basic'; 
-  private isValid: boolean | null = false;
+  private isValid: boolean | null = null;
 
-  constructor(){  }
+  constructor(){
+    this.startValue()
+  }
+   
+  startValue(){
+    if(this.ngModel){
+      if(!isValid(this.ngModel)){
+        console.log(this.ngModel + "is invalid")
+      }
+
+      this._dateAsStrting = format(this.ngModel, "ddMMyyyy")
+    }
+  }
 
   ngDoCheck(): void {
     this.updateStatus()
@@ -48,20 +62,26 @@ export class AppDateComponent implements ControlValueAccessor, DoCheck {
     this.ngModelChange.emit(this.parseDate(value))
   }
   
-  writeValue(obj: any): void {
+  writeValue(obj: Date): void {
     this.ngModel = obj
+    this.startValue()
   }
 
   registerOnChange(fn: any): void {
     this.onModelChanges = fn
   }
 
-  registerOnTouched(fn: any): void {}
+  registerOnTouched(fn: any): void {
+    this.setSubmmited = fn
+  }
 
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled
   }
 
+  setSubmmited(){
+    this.submmited = true
+  }
   
   parseDate(date: string): Date | null {
     
@@ -85,7 +105,7 @@ export class AppDateComponent implements ControlValueAccessor, DoCheck {
   }
 
   updateStatus(){
-    if(this.submmited){
+    if(!this.submmited){
       this.status = 'basic';  
     } else {
       if(this.isValid || this.isValid === null){

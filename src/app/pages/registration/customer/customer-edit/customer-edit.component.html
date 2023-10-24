@@ -1,7 +1,7 @@
 <form [formGroup]="form" (submit)="submit()" *ngIf="loaded">
   <div class="row">
     <div class="col-lg-12">
-      <nb-card>
+      <nb-card accent="warning">
 
         <nb-card-header>
           {{title}}
@@ -45,13 +45,10 @@
             </div>
 
               <div [ngClass]="personTypeValue === 'INDIVIDUAL'? 'col-xl-4 col-12':'col-xl-6 col-12'" >
+              
                 <label for="birthDay" class="label">Data de Nascimento:</label>
-                <ngx-input-date
-                  [model]="customer.birthDay"
-                  (setBlur)="setBirthDayTouched()"
-                  (setDate)="setDate($event)"
-                  placeholder="Data de Nascimento:" [status]="getStatus('birthDay')"></ngx-input-date>
-                <error-message [message]="'Esse data não é valida'" [show]="(birthDay.errors?.dateNotValid && (submmited || this.form.touched))"></error-message>
+                <app-date [submmited]="submmited" formControlName="birthDay" (ngModelChange)="setBirthDay($event)" ></app-date>
+              
               </div>
             </div>
 
@@ -65,7 +62,7 @@
                     <div class="row mb-3">
 
                       <div class="col-md-4">
-                        <input nbInput fullWidth formControlName="number" mask="00 0000-0000"
+                        <input nbInput fullWidth formControlName="number" mask="00 0 0000-0000"
                           [status]="submmited ? (form.get('phoneNumbers').get(i.toString()).get('number').valid ? 'success' : 'danger') : 'basic' "
                           placeholder="Número de telefone"
                          >
@@ -125,8 +122,8 @@
               <nb-icon icon="arrow-back-outline"></nb-icon>
             </button>
 
-            <button type="submit" nbButton outline status="success">
-              <nb-icon icon="save-outline"></nb-icon>
+            <button type="submit" nbButton outline status="warning">
+              <nb-icon icon="edit-outline"></nb-icon>
             </button>
           </div>
         </nb-card-footer>

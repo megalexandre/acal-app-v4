@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Customer } from 'app/pages/registration/customer/customer.model/customer';
 import { NbToastrService } from '@nebular/theme';
 import { DataService } from 'app/@shared/data.service';
+import { Customer } from 'app/pages/registration/customer/customer.model/customer';
 import { CustomerComponent } from '../customer.component';
 import { CustomerService } from './../customer.service';
 
@@ -47,14 +47,13 @@ export class CustomerEditComponent extends CustomerComponent implements OnInit {
 
   override createForm(): void {
     super.createForm();
-
   }
 
   patchFormValues(customer: Customer){
     this.form.patchValue({
       name: customer.name,
       documentNumber: customer.documentNumber,
-      birthDay: customer.birthDay,
+      birthDay: new Date(Date.parse(customer.birthDay.toLocaleString())) ,
       membershipNumber: customer.membershipNumber,
     });
 
