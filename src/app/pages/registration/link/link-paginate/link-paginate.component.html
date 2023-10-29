@@ -44,11 +44,11 @@
           </th>
 
           <th>
-            <app-select-category></app-select-category>
+            <app-category-pick (ngModelChange)="setCategory($event)" [ngModel]="filter.category"></app-category-pick>
           </th>
 
           <th>
-            <app-select-area ></app-select-area>
+            <app-area-pick (ngModelChange)="setArea($event)" [ngModel]="filter.area"></app-area-pick>
           </th>
 
           <th>

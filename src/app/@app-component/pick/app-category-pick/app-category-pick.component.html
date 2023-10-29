@@ -1,0 +1,8 @@
+<nb-select placeholder="Categoria" [selected]="ngModel" fullWidth (selectedChange)="selectedChange($event)" [compareWith]="compareWith">
+  <nb-option [value]='null'>Selecione...</nb-option> 
+  <nb-option-group [title]='categoryGroup.name | categoryType' *ngFor="let categoryGroup of categoriesGroups" >
+    <nb-option *ngFor="let category of categoryGroup.categories" [value]='category'>
+      {{category.name}} {{category.type | categoryType}}
+    </nb-option>
+  </nb-option-group>
+</nb-select>

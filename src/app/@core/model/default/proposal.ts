@@ -27,5 +27,6 @@ export interface InvoiceDetail {
 
 export interface LinkDetail{
   linkId: string,
-  customer: string
+  customer: string,
+  address: string,
 }

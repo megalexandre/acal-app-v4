@@ -46,7 +46,7 @@
 
               <div [ngClass]="personTypeValue === 'INDIVIDUAL'? 'col-xl-4 col-12':'col-xl-6 col-12'" >
                 <label for="birthDay" class="label">Data de Nascimento:</label>
-                <app-date [submmited]="submmited" (ngModelChange)="setBirthDay($event)" ></app-date>
+                <app-date-reactive formControlName="birthDay" [placeholder]="'Data de nascimento'" [isTouched]='submmited'> </app-date-reactive>
               </div>
             </div>
 

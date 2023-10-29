@@ -16,6 +16,7 @@ export class InvoiceCreateComponent implements OnInit {
   public form: FormGroup;
   public submmited: boolean = false;
   public proposals: Proposal[] = null;
+  public dueDate: Date = null;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -38,8 +39,6 @@ export class InvoiceCreateComponent implements OnInit {
     })
   }
 
-
-
   public submit(){
     this.submmited = true;
 
@@ -50,7 +49,7 @@ export class InvoiceCreateComponent implements OnInit {
     this.proposalService.listProposal(this.form.value).subscribe(
       (proposals: Proposal[]) => {
         this.proposals = proposals
-        this.proposals.forEach(it => {
+        this.proposals?.forEach(it => {
           it.selected = false
           it.invoices.forEach(it => {
             it.selected = false;
@@ -82,14 +81,11 @@ export class InvoiceCreateComponent implements OnInit {
     const allInvoices = this.proposals.map(p => p.invoices)
     const allInvocesAsLIst = Array.prototype.concat.apply([], allInvoices) as InvoiceProposal[]
     const allValidInvoices = allInvocesAsLIst.filter(it => it.selected)
-    this.service.createInvoice(this.convertInvoiceProposalListToInvoiceList(allValidInvoices)).subscribe(
+    const createInvoice = this.convertInvoiceProposalListToInvoiceList(allValidInvoices)
+    this.service.createInvoice(createInvoice).subscribe(
       ()=> {
-
+        this.submit()
       },
-      ()=> {
-
-      }
-
     )
   }
 
@@ -97,7 +93,7 @@ export class InvoiceCreateComponent implements OnInit {
     return invoiceProposals.map((invoiceProposal) => ({
       reference: invoiceProposal.reference,
       emission: invoiceProposal.emission,
-      dueDate: invoiceProposal.emission,
+      dueDate: this.dueDate,
       linkDetail: invoiceProposal.linkDetail,
       invoiceDetails: invoiceProposal.invoiceDetails,
     }));

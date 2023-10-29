@@ -1,0 +1,8 @@
+<nb-select placeholder="Endereço" fullWidth (selectedChange)="selectedChange($event)">
+  <nb-option [value]='null'>Selecione...</nb-option>
+  <nb-option-group [title]='group.name' *ngFor="let group of groups" >
+    <nb-option *ngFor="let value of group.values" [value]='value'>
+      {{value | json}}
+    </nb-option>
+  </nb-option-group>
+</nb-select>

@@ -5,6 +5,8 @@ import { LinkPage, LinkPageFilter } from 'app/pages/registration/link/link.model
 import { Page } from '@model/page';
 import { DataService } from 'app/@shared/data.service';
 import { LinkService } from '../link.service';
+import { Category } from '@model/default/category';
+import { Area } from '@model/default/area';
 
 @Component({
   templateUrl:'./link-paginate.component.html',
@@ -29,5 +31,21 @@ export class LinkPaginateComponent extends PaginateComponent implements OnInit {
   ngOnInit(): void {
     this.search();
   }
+
+  reset(){
+    this.filter.reset()
+    this.search()
+  }
+  
+  setCategory(category: Category | null){
+    this.filter.category = category;
+    this.search()
+  }
+
+  setArea(area: Area| null){
+    this.filter.area = area;
+    this.search()
+  }
+
 
 }

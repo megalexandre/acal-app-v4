@@ -45,10 +45,8 @@
             </div>
 
               <div [ngClass]="personTypeValue === 'INDIVIDUAL'? 'col-xl-4 col-12':'col-xl-6 col-12'" >
-              
                 <label for="birthDay" class="label">Data de Nascimento:</label>
-                <app-date [submmited]="submmited" formControlName="birthDay" (ngModelChange)="setBirthDay($event)" ></app-date>
-              
+                <app-date-reactive formControlName="birthDay" [placeholder]="'Data de nascimento'" [isTouched]='submmited'> </app-date-reactive>
               </div>
             </div>
 
@@ -64,8 +62,7 @@
                       <div class="col-md-4">
                         <input nbInput fullWidth formControlName="number" mask="00 0 0000-0000"
                           [status]="submmited ? (form.get('phoneNumbers').get(i.toString()).get('number').valid ? 'success' : 'danger') : 'basic' "
-                          placeholder="Número de telefone"
-                         >
+                          placeholder="Número de telefone">
 
                         <error-message [message]="'Escolha um número de telefone'"
                           [show]="form.get('phoneNumbers').get(i.toString()).get('number').hasError('required') &&

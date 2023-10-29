@@ -10,7 +10,7 @@
       <thead>
         <tr>
 
-          <th class="col-6 align-middle" (click)="order('name')">
+          <th class="col-4 align-middle" (click)="order('name')">
             Nome:
           </th>
 
@@ -18,7 +18,15 @@
             Endereço:
           </th>
 
+          <th class="col-1 align-middle" (click)="order('name')">
+            Referencia:
+          </th>
+
           <th class="col-2 align-middle" (click)="order('name')">
+            Vencimento:
+          </th>
+
+          <th class="col-1 align-middle" (click)="order('name')">
             Valor:
           </th>
 
@@ -34,11 +42,20 @@
         <tr>
 
           <th>
+            <input type="text" nbInput placeholder="Nome:" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.customerName" />
           </th>
       
           <th>
+            <input type="text" nbInput placeholder="Nome:" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.addressName" />
           </th>
       
+          <th>
+            <app-reference [(ngModel)]="filter.reference" (keydown.enter)="search()" ></app-reference>
+          </th>
+     
+          <th>
+          </th>
+     
           <th>
           </th>
 
@@ -56,20 +73,37 @@
         </tr>
       </thead>
 
-      <tbody >
-        <tr *ngFor="let item of page?.content">
-          <td class="align-middle"> </td>
-          <td class="align-middle"> </td>
-          <td class="align-middle"> </td>
+      <tbody>
+        <tr *ngFor="let item of page?.content" class='table-{{item.status}}'>
+          
+          <td class="align-middle"> 
+            {{item.linkDetail.customer}}
+          </td>
+          
+          <td class="align-middle"> 
+            {{item.linkDetail.address}}
+          </td>
+          
+          <td class="align-middle"> 
+            {{item.reference.value}}
+          </td>
+          
+          <td class="align-middle">
+            {{item.dueDate | date}}
+          </td>
+          
+          <td class="align-middle">
+            {{item.totalValue | currency}}
+           </td>
 
           <td class="align-middle">
-            <button nbButton outline status="warning" fullWidth (click)="edit(item.id)">
+            <button nbButton status="warning" fullWidth (click)="edit(item.id)">
               <nb-icon icon="edit-2-outline"></nb-icon>
             </button>
           </td>
 
           <td class="align-middle">
-            <button nbButton outline status="danger" fullWidth (click)="remove(item.id)" >
+            <button nbButton status="danger" fullWidth (click)="remove(item.id)" >
               <nb-icon icon="trash-2-outline"></nb-icon>
             </button>
           </td>
@@ -79,9 +113,8 @@
 
       <tfoot>
         <tr>
-          <td colspan="3" *ngIf="page">
-            <ngx-app-table-footer [page]="page" (search)="paginate($event)">
-            </ngx-app-table-footer>
+          <td colspan="7" *ngIf="page">
+            <ngx-app-table-footer [page]="page" (search)="paginate($event)"></ngx-app-table-footer>
           </td>
         </tr>
       </tfoot>

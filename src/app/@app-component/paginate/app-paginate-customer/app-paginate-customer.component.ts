@@ -5,18 +5,17 @@ import { Page } from '@model/page';
 import { CustomerService } from 'app/pages/registration/customer/customer.service';
 
 @Component({
-  selector: 'app-select-customer',
-  templateUrl: './app-select-customer.component.html',
-  styleUrls: ['./app-select-customer.component.scss'],
+  selector: 'app-paginate-customer',
+  templateUrl: './app-paginate-customer.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => AppSelectCustomerComponent),
+      useExisting: forwardRef(() => AppPaginateCustomerComponent),
       multi: true
     }
   ]
 })
-export class AppSelectCustomerComponent implements ControlValueAccessor{
+export class AppPaginateCustomerComponent implements ControlValueAccessor{
 
   @Output()
   public ngModelChange: EventEmitter<Customer | null> = new EventEmitter<Customer | null>();

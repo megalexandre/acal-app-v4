@@ -1,4 +1,4 @@
-import { Component, DoCheck, EventEmitter, Input, Output, forwardRef } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { StatusComponent } from '@model/default/status';
 import { format, isValid, parse, parseISO } from 'date-fns';
@@ -26,11 +26,11 @@ import { format, isValid, parse, parseISO } from 'date-fns';
     }
   ]
 })
-export class AppDateComponent implements ControlValueAccessor, DoCheck {
+export class AppDateComponent implements ControlValueAccessor, DoCheck, OnInit {
 
   @Input() public placeHolder: string = "Data:";
   @Input() public submmited?: boolean = false;
-  @Input() public ngModel: Date | null = null;
+  @Input() public value: Date | null = null;
   @Output() public ngModelChange = new EventEmitter<Date | null>();
 
   public _dateAsStrting: String = ""
@@ -42,14 +42,14 @@ export class AppDateComponent implements ControlValueAccessor, DoCheck {
   constructor(){
     this.startValue()
   }
-   
-  startValue(){
-    if(this.ngModel){
-      if(!isValid(this.ngModel)){
-        console.log(this.ngModel + "is invalid")
-      }
 
-      this._dateAsStrting = format(this.ngModel, "ddMMyyyy")
+  ngOnInit(): void {
+    this.startValue();
+  }
+  
+  startValue(){
+    if(this.value && isValid(this.value)){
+      this._dateAsStrting = format(this.value, "ddMMyyyy")
     }
   }
 
@@ -63,8 +63,7 @@ export class AppDateComponent implements ControlValueAccessor, DoCheck {
   }
   
   writeValue(obj: Date): void {
-    this.ngModel = obj
-    this.startValue()
+    this.value = obj
   }
 
   registerOnChange(fn: any): void {

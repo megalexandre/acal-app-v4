@@ -53,9 +53,13 @@ export class CustomerEditComponent extends CustomerComponent implements OnInit {
     this.form.patchValue({
       name: customer.name,
       documentNumber: customer.documentNumber,
-      birthDay: new Date(Date.parse(customer.birthDay.toLocaleString())) ,
+      birthDay: null,
       membershipNumber: customer.membershipNumber,
     });
+
+    if(customer.birthDay){
+      this.birthDay.setValue(new Date(Date.parse(customer.birthDay.toLocaleString())))
+    }
 
     customer.phoneNumbers?.forEach(item =>{
         super.addPhoneNumber(item)

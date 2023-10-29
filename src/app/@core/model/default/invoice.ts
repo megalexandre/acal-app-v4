@@ -1,6 +1,7 @@
 import { Link } from "./_index";
 import { PageFilter } from "./page-filter";
 import { Reference } from "./reference";
+import { StatusComponent } from "./status";
 
 
 export interface Invoice {
@@ -17,15 +18,70 @@ export interface Invoice {
 
 export interface InvoicePage {
   id: string,
-  isOverdue: boolean,
-  totalValue: number,
-  reference: string,
-  link?: Link,
-  dueDate: string,
+  reference: Reference,
+  dueDate: Date,
   emission: string,
-  isPayed: boolean,
   invoiceDetails: InvoiceDetail[],
-  status: string,
+  linkDetail: LinkDetail,
+  totalValue: number,
+  totalAwaitingPayment: number,
+  totalPaidValue: number,
+  isPayed: boolean,
+  isOverDue: boolean,
+  daysInOverDue: number,
+  cancellationOfRisk: boolean,
+} 
+
+export class InvoicePageImplementation implements InvoicePage {
+  id: string;
+  reference: Reference;
+  dueDate: Date;
+  emission: string;
+  invoiceDetails: InvoiceDetail[];
+  linkDetail: LinkDetail;
+  totalValue: number;
+  totalAwaitingPayment: number;
+  totalPaidValue: number;
+  isPayed: boolean;
+  isOverDue: boolean;
+  daysInOverDue: number;
+  cancellationOfRisk: boolean;
+
+  constructor(data: InvoicePage) {
+    this.id = data.id;
+    this.reference = data.reference;
+    this.dueDate = data.dueDate;
+    this.emission = data.emission;
+    this.invoiceDetails = data.invoiceDetails;
+    this.linkDetail = data.linkDetail;
+    this.totalValue = data.totalValue;
+    this.totalAwaitingPayment = data.totalAwaitingPayment;
+    this.totalPaidValue = data.totalPaidValue;
+    this.isPayed = data.isPayed;
+    this.isOverDue = data.isOverDue;
+    this.daysInOverDue = data.daysInOverDue;
+    this.cancellationOfRisk = data.cancellationOfRisk;
+  }
+
+
+  get status(): StatusComponent{
+    if(this.isPayed){
+      return 'success'
+    } else {
+      if(this.isOverDue){
+        return 'danger'
+      } else {
+        return 'basic'
+      }
+    }
+  }
+}
+
+
+export interface LinkDetail{
+  linkId: string,
+  customer: string,
+  address: string,
 }
 
 
@@ -63,27 +119,22 @@ export interface InvoiceFilter {
 export class InvoicePageFilter extends PageFilter {
 
     id?: string = null;
-    reference?: string = null;
+    reference?: Reference = null;
     value?: number = null;
     dueDate?: string = null;
-    customerName: string = null;
-    address: any = null;
+    customerName?: string = null;
+    addressName?: string = null;
 
     reset(){
       super.reset();
       this.id = null;
       this.reference = null;
-      this.address = null,
+      this.addressName = null,
+      this.customerName = null;
       this.value = null;
       this.dueDate = null;
-      this.customerName = null;
     }
-
 }
-
-
-
-
 
 export interface CreateInvoice{
   reference: string,
@@ -97,14 +148,14 @@ export interface CreateInvoiceResponse{
   id: string,
 }
 
-
 export interface CreateLinkDetail{
-  linkId: String,
-  customer: String
+  linkId: string,
+  customer: string,
+  address: string,
 }
 
 export interface CreateInvoiceDetail{
-  reason: String,
+  reason: string,
   value: number,
   dataPaid: Date,
 }

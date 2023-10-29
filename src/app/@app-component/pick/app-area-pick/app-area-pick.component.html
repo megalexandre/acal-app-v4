@@ -1,0 +1,8 @@
+<nb-select placeholder="Endereço" fullWidth (selectedChange)="selectedChange($event)" [selected]="ngModel" [compareWith]="compareWith">
+  <nb-option [value]='null'>Selecione...</nb-option>
+
+  <nb-option *ngFor="let value of areas" [value]='value'>
+    {{value.name}}
+  </nb-option>
+
+</nb-select>

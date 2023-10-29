@@ -33,7 +33,7 @@
 
               <div [ngClass]="customer.personType === 'INDIVIDUAL'? 'col-xl-4 col-12':'col-md-6 col-12'" >
                 <label for="birthDay" class="label">Data de Nascimento:</label>
-                <input id="birthDay" mask="00/00/0000" type="text" nbInput fullWidth  placeholder="Data de Nascimento:" [(ngModel)]="customer.birthDay" disabled>
+                <app-date-reactive [(ngModel)]="customer.birthDay" disabled></app-date-reactive>
               </div>
 
             </div>

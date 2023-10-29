@@ -14,7 +14,7 @@
             <div class="row mb-3">
 
               <div class="col-3">
-                <label for="name" class="label">Refencia:</label><br/>
+                <label for="name" class="label">Referência:</label><br/>
                 <app-reference formControlName="reference" ></app-reference>
                 <error-message [message]="'Nome é obrigatório'"></error-message>
               </div>
@@ -103,17 +103,24 @@
       <tfoot>
         <tr>
           <td class="col-8 text-center align-middle"></td>
+          <td class="col-1 text-center align-middle"></td>
+          <td class="col-1 text-center align-middle">Data de vencimento: </td>
+          <td class="align-middle text-center col-2">
+            <app-date-reactive [(ngModel)]="dueDate"></app-date-reactive>
+          </td>
+        </tr>
+        <tr>
+          <td class="col-8 text-center align-middle"></td>
           <td class="col-1 text-center align-middle"><b>Total</b></td>
           <td class="col-1 text-center align-middle"> {{totalValueSelected() | currency }} </td>
           <td class="align-middle text-center col-2">
-            <button type="button" fullWidth nbButton outline status="basic" (click)="confirm()">
+            <button type="button" fullWidth nbButton outline status="basic" (click)="confirm()" [disabled]="dueDate === null">
               Confirmar<nb-icon icon="checkmark-circle-2-outline"></nb-icon>
             </button>
           </td>
         </tr>
-
-            
       </tfoot>
+
     </ngx-app-table>
 
   </nb-card-body>

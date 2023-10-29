@@ -1,27 +1,27 @@
 <div class="row">
   <div class="col-lg-12">
-    <nb-card>
+    <nb-card accent="success">
+      
       <nb-card-header>
-        customer: {{ form.get('customer').value | json }} <br/>
-        category: {{ form.get('category').value | json }} <br/>
+        Criar Ligação
       </nb-card-header>
 
       <nb-card-body>
           <nb-tabset fullWidth #createlink>
-
+             
             <nb-tab #customer  tabTitle="Úsuario" [badgeText]="validCustomerTab ? 'OK' : ''" [badgeStatus]="validCustomerTab ? 'success' : 'basic'" badgePosition="center start">
               <p><strong>Selecione o Úsuario:</strong></p>
 
-              <app-select-customer (ngModelChange)="setCustomer($event);" (ngModelChange)="renderButtons()"></app-select-customer>
+              <app-paginate-customer (ngModelChange)="setCustomer($event);" (ngModelChange)="renderButtons()"></app-paginate-customer>
 
               <div class="d-flex justify-content-between">
                 <button type="button" nbButton outline status="basic" (click)="back()">Voltar</button>
                 <button type="button" #firstTabButton nbButton outline status="success" [disabled]="!validCustomerTab" (click)="toCategoryTab()">Avançar</button>
               </div>
             </nb-tab>
-
+          
             <nb-tab tabTitle="Categoria" #category [badgeText]="validCategoryTab ? 'OK' : ''" [badgeStatus]="validCategoryTab ? 'success' : 'basic'" badgePosition="center start">
-                <app-select-category (ngModelChange)="setCategory($event);" (ngModelChange)="renderButtons()"></app-select-category>
+                <app-paginate-category (ngModelChange)="setCategory($event);" (ngModelChange)="renderButtons()"></app-paginate-category>
 
                 <div class="d-flex justify-content-between">
                   <button type="button" nbButton outline status="basic" (click)="back()">Voltar</button>
@@ -31,7 +31,7 @@
 
             <nb-tab tabTitle="Endereço" [badgeText]="validAddressTab ? 'OK' : ''" [badgeStatus]="validAddressTab ? 'success' : ''" #address disabled="true">
 
-              <app-select-address (ngModelChange)="setAddress($event);" (ngModelChange)="renderButtons()"></app-select-address>
+              <app-paginate-address (ngModelChange)="setAddress($event);" (ngModelChange)="renderButtons()"></app-paginate-address>
 
               <div class="d-flex justify-content-between">
                 <button type="button" nbButton outline status="basic" (click)="back()">Voltar</button>

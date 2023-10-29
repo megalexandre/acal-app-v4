@@ -5,18 +5,17 @@ import { Page } from '@model/page'
 import { CategoryService } from 'app/pages/registration/category/category.service'
 
 @Component({
-  selector: 'app-select-category',
-  templateUrl: './app-select-category.component.html',
-  styleUrls: ['./app-select-category.component.scss'],
+  selector: 'app-paginate-category',
+  templateUrl: './app-paginate-category.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => AppSelectCategoryComponent),
+      useExisting: forwardRef(() => AppPaginateCategoryComponent),
       multi: true,
     },
   ],
 })
-export class AppSelectCategoryComponent implements ControlValueAccessor {
+export class AppPaginateCategoryComponent implements ControlValueAccessor {
 
   @Output()
   public ngModelChange: EventEmitter<Category | null> = new EventEmitter<Category | null>()

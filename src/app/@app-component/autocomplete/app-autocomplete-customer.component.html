@@ -1,0 +1,17 @@
+<input 
+  #autoInput
+  nbInput
+  fullWidth
+  type="text"
+  placeholder="Enter value"
+  [(ngModel)]="customerName"
+  (ngModelChange)="update($event)"
+  />
+
+  <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
+
+  <nb-option *ngFor="let option of filteredCustomers$ | async" [value]="option">
+    {{ option }}
+  </nb-option>
+
+</nb-autocomplete>

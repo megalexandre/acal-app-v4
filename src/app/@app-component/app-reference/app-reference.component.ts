@@ -1,6 +1,9 @@
 import { Component, DoCheck, EventEmitter, Input, OnChanges, Output, SimpleChanges, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Reference } from '@model/default/reference';
 import { StatusComponent } from '@model/default/status';
+
+const months = {  1: "JANUARY", 2: "FEBRUARY", 3: "MARCH",  4: "APRIL",  5: "MAY",  6: "JUNE",  7: "JULY",  8: "AUGUST",  9: "SEPTEMBER",  10: "OCTOBER",  11: "NOVEMBER",  12: "DECEMBER"};
 
 @Component({
   selector: 'app-reference',
@@ -9,10 +12,9 @@ import { StatusComponent } from '@model/default/status';
     nbInput
     fullWidth
     mask="00/0000"
-    [(ngModel)]="model"
-    (ngModelChange)="onChange($event)"
-    [status]=status
-    [disabled]="disabled"
+    [dropSpecialCharacters]="false"
+    [(ngModel)]="value"
+    (ngModelChange)="ngModelChange($event)"
   >`,
   providers: [
     {
@@ -22,69 +24,42 @@ import { StatusComponent } from '@model/default/status';
     }
   ]
 })
-export class AppReferenceComponent implements ControlValueAccessor, DoCheck{
+export class AppReferenceComponent implements ControlValueAccessor {
 
-  public status: StatusComponent = 'basic';
+  protected isDisabled: boolean = false;
+  protected isValid: boolean = true;
 
-  @Input()
-  public submitted: boolean = false;
+  protected value: string ="";
+  protected status: StatusComponent = 'basic';
+  
+  onChange = (_: any) => {};
+  onTouched = () => {};
 
-  @Input()
-  public model: string | null = null;
+  ngModelChange(value: string){
+    if(value.length === 7){
+      const values = value.split('/')
+      const reference: Reference = {
+        month: months[Number(values[0])],
+        year: Number(values[1]),
+      }
+      this.onChange(reference);
 
-  @Input()
-  public disabled: boolean = false;
-
-  @Output()
-  public modelChange: EventEmitter<string | null> = new EventEmitter<string | null>();
-
-  constructor() { }
-
-  ngDoCheck() {
-    this.updateStatus();
-  }
-
-  updateStatus(){
-    if(this.submitted === false){
-      this.status = 'basic'
-    } else {
-
-      if(this.model != null){
-          this.status = 'success'
-        } else {
-          this.status = 'danger'
-        }
+    }else {
+      return null
     }
   }
 
-  onChange(value: string | null){
-    this.model = value;
-    this.updateStatus();
-    this.emit()
-  };
-
-  onTouched(){
-    this.updateStatus()
-  }
-
-  writeValue(model: string): void {
-    this.model = model
-    this.onChange(model);
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+  writeValue(value: string | null): void {
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = fn
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 
-  public emit(){
-    this.modelChange.emit(this.model)
-  }
+  
 }
+

@@ -57,8 +57,8 @@ export interface CustomerPage {
 }
 
 export interface CustomerFilter {
-  name: string,
-  document: string,
+  name?: string,
+  document?: string,
 }
 
 export function createCustomerFilter(): CustomerFilter {

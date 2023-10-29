@@ -1,0 +1,12 @@
+<input
+  nbInput
+  fullWidth
+  mask="00/00/0000"
+  type="text"
+  [status]="status"
+  [placeholder]="placeholder"
+  [ngModel]="value"
+  (focus)="onInputChange($event); touched()"
+  (ngModelChange)="onInputChange($event)"
+  [disabled]="isDisabled"
+>

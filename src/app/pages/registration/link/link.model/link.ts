@@ -43,6 +43,7 @@ export class LinkPageFilter extends PageFilter {
   id?: string = null;
   customer?: CustomerFilter = createCustomerFilter();
   category?: CategoryFilter = createCategoryFilter();
+  
   address?: Address = null;
   area?: Area = null;
   mailAddress?: Address = null;

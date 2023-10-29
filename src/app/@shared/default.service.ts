@@ -18,7 +18,7 @@ export abstract class DefaultService <
   }
 
   public list(): Observable<M[]>{
-    return this.http.get<M[]>(`${this.env + '/all'}`);
+    return this.http.get<M[]>(`${this.env + '/list'}`);
   }
 
   public getReport(filter: Filter){

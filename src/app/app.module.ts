@@ -24,7 +24,6 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(localePt);
 
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [

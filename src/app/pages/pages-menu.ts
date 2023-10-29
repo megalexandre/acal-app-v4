@@ -28,7 +28,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'book-open-outline', 
     children: [
       {
-        title: 'Pagamentos',
+        title: 'Faturas',
         link: '/pages/financial',
       },
       {
