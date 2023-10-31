@@ -49,6 +49,14 @@
 
 <nb-card *ngIf="proposals">
 
+  <nb-card-header>
+    <div class="d-flex justify-content-between">
+      <span> Faturas </span>
+      <span> 
+        Referência: {{form.value.reference | reference}} </span>
+    </div>
+  </nb-card-header>
+
   <nb-card-body>
 
     <ngx-app-table [nbSpinner]="loading" [tableStriped]="false">

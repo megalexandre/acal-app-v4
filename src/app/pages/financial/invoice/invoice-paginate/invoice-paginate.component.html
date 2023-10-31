@@ -6,12 +6,16 @@
 
   <nb-card-body>
 
-    <ngx-app-table [nbSpinner]="loading" [tableStriped]="true">
+    <ngx-app-table [nbSpinner]="loading" [tableStriped]="false">
       <thead>
         <tr>
 
-          <th class="col-4 align-middle" (click)="order('name')">
+          <th class="col-3 align-middle" (click)="order('name')">
             Nome:
+          </th>
+
+          <th class="col-1 align-middle" (click)="order('name')">
+            Número:
           </th>
 
           <th class="col-3 align-middle" (click)="order('name')">
@@ -45,6 +49,9 @@
             <input type="text" nbInput placeholder="Nome:" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.customerName" />
           </th>
       
+          <th>
+          </th>
+
           <th>
             <input type="text" nbInput placeholder="Nome:" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.addressName" />
           </th>
@@ -81,6 +88,10 @@
           </td>
           
           <td class="align-middle"> 
+            {{item.number.value}}
+          </td>
+
+          <td class="align-middle"> 
             {{item.linkDetail.address}}
           </td>
           
@@ -113,7 +124,7 @@
 
       <tfoot>
         <tr>
-          <td colspan="7" *ngIf="page">
+          <td colspan="8" *ngIf="page">
             <ngx-app-table-footer [page]="page" (search)="paginate($event)"></ngx-app-table-footer>
           </td>
         </tr>

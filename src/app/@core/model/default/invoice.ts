@@ -21,6 +21,7 @@ export interface InvoicePage {
   reference: Reference,
   dueDate: Date,
   emission: string,
+  number: InvoiceNumberResponse;
   invoiceDetails: InvoiceDetail[],
   linkDetail: LinkDetail,
   totalValue: number,
@@ -37,6 +38,7 @@ export class InvoicePageImplementation implements InvoicePage {
   reference: Reference;
   dueDate: Date;
   emission: string;
+  number: InvoiceNumberResponse;
   invoiceDetails: InvoiceDetail[];
   linkDetail: LinkDetail;
   totalValue: number;
@@ -52,6 +54,7 @@ export class InvoicePageImplementation implements InvoicePage {
     this.reference = data.reference;
     this.dueDate = data.dueDate;
     this.emission = data.emission;
+    this.number = data.number;
     this.invoiceDetails = data.invoiceDetails;
     this.linkDetail = data.linkDetail;
     this.totalValue = data.totalValue;
@@ -77,6 +80,12 @@ export class InvoicePageImplementation implements InvoicePage {
   }
 }
 
+export interface InvoiceNumberResponse{
+  year: number,
+  month: number,
+  number: string,
+  value: string,
+}
 
 export interface LinkDetail{
   linkId: string,
@@ -139,6 +148,7 @@ export class InvoicePageFilter extends PageFilter {
 export interface CreateInvoice{
   reference: string,
   emission: Date,
+  number: string,
   dueDate: Date,
   linkDetail: CreateLinkDetail,
   invoiceDetails:CreateInvoiceDetail[],

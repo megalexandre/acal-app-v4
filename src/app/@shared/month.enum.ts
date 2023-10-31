@@ -1,4 +1,4 @@
-enum Month {
+export enum Month {
   january = 'Janeiro',
   february = 'Fevereiro',
   march = 'Março',
@@ -12,5 +12,3 @@ enum Month {
   november = 'Novembro',
   december = 'Dezembro',
 }
-
-export const months = Object.values(Month);

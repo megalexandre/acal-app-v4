@@ -91,6 +91,7 @@ export class InvoiceCreateComponent implements OnInit {
 
   public convertInvoiceProposalListToInvoiceList(invoiceProposals: InvoiceProposal[]): CreateInvoice[] {
     return invoiceProposals.map((invoiceProposal) => ({
+      number: invoiceProposal.number,
       reference: invoiceProposal.reference,
       emission: invoiceProposal.emission,
       dueDate: this.dueDate,

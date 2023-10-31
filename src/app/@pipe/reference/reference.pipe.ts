@@ -1,21 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { MONTH } from '@model/enum/month.enum';
+import { Reference } from '@model/default/reference';
+import { MonthPipe } from '../month/month.pipe';
 
 @Pipe({name: 'reference', pure: true})
 export class ReferencePipe implements PipeTransform {
 
-  transform(reference: string): string {
+  constructor(public monthPipe: MonthPipe){
+
+  }
+
+  transform(reference: Reference): string {
 
     if(!reference){
-      return //garbage in garbage out
+      return;
     }
 
-    if(reference.length === 6){
-      const month = (MONTH[reference.substring(0,2)])
-      return month +"/"+ reference.substring(2,6)
-    }
-
-    return reference;
+    return this.monthPipe.transform(reference.month) +"/"+ reference.year;
   }
 
 }

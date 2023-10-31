@@ -12,6 +12,7 @@ export interface Proposal{
 export interface InvoiceProposal {
   reference: string,
   emission: Date,
+  number: string,
   linkDetail: LinkDetail,
   invoiceDetails:  InvoiceDetail[],
   total: number,
