@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { DateTimePipe, IdentificationPipe, ParamPipe, ReasonPipe, ReferencePipe, TypePipe } from '.';
 import { CategoryTypePipe } from './category/category-type.pipe';
 import { MonthPipe } from './month/month.pipe';
+import { AddressPipe } from './address/address.pipe';
 
 const PIPES = [
   IdentificationPipe,
@@ -13,6 +14,7 @@ const PIPES = [
   TypePipe,
   CategoryTypePipe,
   MonthPipe,
+  AddressPipe,
 ];
 
 @NgModule({

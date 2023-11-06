@@ -29,6 +29,11 @@ const routes: Routes = [{
         .then(m => m.FinancialModule),
     },
     {
+      path: 'quality',
+      loadChildren: () => import('./quality/quality.module')
+        .then(m => m.QualityModule),
+    },
+    {
       path: 'layout',
       loadChildren: () => import('./layout/layout.module')
         .then(m => m.LayoutModule),

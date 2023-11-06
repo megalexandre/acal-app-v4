@@ -23,6 +23,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ]
   },
+
   {
     title: 'Financeiro',
     icon: 'book-open-outline', 
@@ -34,6 +35,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Ligações',
         link: '/pages/registration/link',
+      },
+    ]
+  },
+
+  {
+    title: 'Água',
+    icon: 'drop-outline', 
+    children: [
+      {
+        title: 'Qualidade',
+        link: '/pages/quality/quality',
+      },
+      {
+        title: 'Hidrômetro',
+        link: '/pages/quality/hydrometer',
       },
     ]
   },

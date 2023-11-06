@@ -12,5 +12,4 @@ export class MonthPipe implements PipeTransform {
 
     return Month[month.toLocaleLowerCase()];
   }
-
 }
