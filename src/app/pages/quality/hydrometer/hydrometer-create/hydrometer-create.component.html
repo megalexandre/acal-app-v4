@@ -1,52 +1,44 @@
 <form [formGroup]="form" (submit)="submit()" *ngIf="!hydrometerProposals">
 
-  <div class="row">
-    <div class="col-lg-12">
-      <nb-card>
+  <nb-card>
+    <nb-card-header>
+      {{title}}
+    </nb-card-header>
 
-        <nb-card-header>
-          {{title}}
-        </nb-card-header>
+    <nb-card-body>
 
-        <nb-card-body>
+      <div class="row mb-3">
 
-          <div class="row mb-3">
+        <div class="col-3">
+          <label for="name" class="label">Referência:</label><br/>
+          <app-reference formControlName="reference" ></app-reference>
+          <error-message [message]="'Nome é obrigatório'"></error-message>
+        </div>
 
-            <div class="col-3">
-              <label for="name" class="label">Referência:</label><br/>
-              <app-reference formControlName="reference" ></app-reference>
-              <error-message [message]="'Nome é obrigatório'"></error-message>
-            </div>
+        <div class="col-3 offset-md-6 align-self-end">
+          <button type="submit" fullWidth nbButton outline status="info">
+            <nb-icon icon="search-outline"></nb-icon>
+          </button>
+        </div>
 
-            <div class="col-3 offset-md-6 align-self-end">
-              <button type="submit" fullWidth nbButton outline status="info">
-                <nb-icon icon="search-outline"></nb-icon>
-              </button>
-            </div>
+      </div>
 
-          </div>
+    </nb-card-body>
 
-        </nb-card-body>
+    <nb-card-footer>
 
-        <nb-card-footer>
+      <div class="d-flex justify-content-between">
+        <button type="button" nbButton outline status="basic" (click)="back()">
+          <nb-icon icon="arrow-back-outline"></nb-icon>
+        </button>
+      </div>
+    </nb-card-footer>
 
-          <div class="d-flex justify-content-between">
-            <button type="button" nbButton outline status="basic">
-              <nb-icon icon="arrow-back-outline"></nb-icon>
-            </button>
+  </nb-card>
 
-        
-          </div>
-        </nb-card-footer>
-
-      </nb-card>
-
-    </div>
-
-  </div>
 </form>
 
-<nb-card *ngIf="hydrometerProposals && loaded">
+<nb-card *ngIf="hydrometerProposals && loaded" class="reset">
 
 <nb-card-header>
   <div class="d-flex justify-content-between">
@@ -58,7 +50,7 @@
 
 <nb-card-body>
 
-  <ngx-app-table [nbSpinner]="loading" [tableStriped]="false">
+  <ngx-app-table [nbSpinner]="loading" [tableStriped]="false" [tableBordered]="false">
 
     <thead>
       <tr>
@@ -100,14 +92,14 @@
       </tr>
     </thead>
    
-    <tbody >
+    <tbody>
       <ng-container *ngFor="let proposal of hydrometerProposals">
 
         <tr [ngClass]="proposal.selected ? 'bg-success' : 'table-primary'" >
           <td class="col-12 text-center align-middle" colspan="8"> {{proposal.area}} </td>
         </tr>
 
-        <tr *ngFor="let hydrometer of proposal.hydrometers" [ngClass]="hydrometer.selected ? 'table-success' : 'table-ligth'">
+        <tr *ngFor="let hydrometer of proposal.hydrometers" [ngClass]="hydrometer.alreadyExists ? 'table-info' : (hydrometer.selected ? 'table-success' : 'table-ligth')">
           <td class="align-middle text-center"> {{hydrometer.address.alias}} </td>
           
           <td class="align-middle text-center">  
@@ -131,8 +123,18 @@
           </td>
           
           <td class="align-middle text-center"> 
-            <nb-checkbox [status]="hydrometer.selected ? 'success' : 'primary' " [checked]="hydrometer.selected" [disabled]="hydrometer.alreadyExists"
-            ></nb-checkbox>
+            
+            <ng-container *ngIf="hydrometer.alreadyExists">
+              
+              <nb-icon icon="archive-outline"></nb-icon>
+              Já Registrado
+            </ng-container>
+            
+
+            <ng-container *ngIf="!hydrometer.alreadyExists">
+              <nb-checkbox [status]="hydrometer.selected ? 'success' : 'primary' " [checked]="hydrometer.selected" [disabled]="hydrometer.alreadyExists"></nb-checkbox>
+            </ng-container>
+
           </td>
         </tr>
           
@@ -142,12 +144,21 @@
 
     <tfoot>
       <tr>
-        <td class="text-center align-middle" colspan="6"></td>
-        <td class="align-middle text-center">
-          <button type="button" fullWidth nbButton outline status="basic" (click)="confirm()">
-            Confirmar<nb-icon icon="checkmark-circle-2-outline"></nb-icon>
+        
+        <td>
+          <button type="button" fullWidth nbButton outline status="basic" (click)="back()">
+            voltar
           </button>
         </td>
+
+        <td colspan="5"></td>
+        
+        <td>
+          <button type="button" fullWidth nbButton outline status="basic" (click)="confirm()">
+            Confirmar <nb-icon icon="checkmark-circle-2-outline"></nb-icon>
+          </button>
+        </td>
+
       </tr>
     </tfoot>
 

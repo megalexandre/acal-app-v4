@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Hydrometer } from '@model/default/_index';
 import { NbToastrService } from '@nebular/theme';
 import { DataService } from 'app/@shared/data.service';
 import { HydrometerComponent } from '../hydrometer.component';
 import { HydrometerService } from '../hydrometer.service';
+import { Hydrometer } from '../hydrometer.model/hydrometer';
 
 @Component({
   templateUrl: './hydrometer-delete.component.html',

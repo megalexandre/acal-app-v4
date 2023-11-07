@@ -11,6 +11,8 @@ const months = {  1: "JANUARY", 2: "FEBRUARY", 3: "MARCH",  4: "APRIL",  5: "MAY
   <input
     nbInput
     fullWidth
+    title="referência"
+    placeHolder="referência"
     mask="00/0000"
     [dropSpecialCharacters]="false"
     [(ngModel)]="value"
@@ -45,11 +47,13 @@ export class AppReferenceComponent implements ControlValueAccessor {
       this.onChange(reference);
 
     }else {
-      return null
+      this.onChange(null);
     }
   }
 
   writeValue(value: string | null): void {
+    this.value = value
+    
   }
 
   registerOnChange(fn: any): void {

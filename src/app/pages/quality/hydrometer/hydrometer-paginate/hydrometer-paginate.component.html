@@ -10,25 +10,25 @@
       <thead>
         <tr>
 
-          <th class="col-4 align-middle" (click)="order('customer.name')">
+          <th class="col-4 align-middle" (click)="order('address.area.name')">
               Endereço:
+              <nb-icon *ngIf="filter.sort.field === 'address.area.name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+              <nb-icon *ngIf="filter.sort.field === 'address.area.name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+          </th>
+
+          <th class="col-2 align-middle" (click)="order('reference')">
+              Referência:
+              <nb-icon *ngIf="filter.sort.field === 'reference' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+              <nb-icon *ngIf="filter.sort.field === 'reference' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
+          </th>
+
+          <th class="col-3 align-middle">
+            Consumo:
               <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
               <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
 
-          <th class="col-2 align-middle" (click)="order('name')">
-              Referencia
-              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
-              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
-          </th>
-
-          <th class="col-3 align-middle" (click)="order('name')">
-            Consumo
-              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
-              <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
-          </th>
-
-          <th class="col-2 align-middle" (click)="order('name')">
+          <th class="col-2 align-middle">
             Valor:
             <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
             <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
@@ -46,9 +46,11 @@
         <tr>
 
           <th>
+            <app-area-pick name="areaPicker" [(ngModel)]="filter.area" (ngModelChange)="search()"></app-area-pick>
           </th>
 
           <th>
+            <app-reference [(ngModel)]="filter.reference" (keydown.enter)="search()" ></app-reference>
           </th>
           
           <th>
@@ -82,7 +84,7 @@
             {{item.reference | reference}}
           </td>
 
-          <td class="align-middle" >
+          <td class="align-middle" [nbTooltip]='(item | tooltipHydrometer)' nbTooltipStatus="basic">
             {{item.consideredConsumption | number}}
           </td>
 

@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Reference } from '@model/default/reference';
 import { NbToastrService } from '@nebular/theme';
 import { ProposalService } from 'app/pages/financial/invoice/proposal.service';
+import { map } from 'rxjs/operators';
+import { CreateHydrometer } from '../hydrometer.model/hydrometer';
 import { HydrometerProposal, HydrometerProposalImpl } from '../hydrometer.model/hydrometer-proposal';
 import { HydrometerService } from '../hydrometer.service';
-import { Reference } from '@model/default/reference';
-import { map } from 'rxjs/operators';
-import { CreateHydrometer, Hydrometer } from '../hydrometer.model/hydrometer';
 
 @Component({
   templateUrl: './hydrometer-create.component.html',
+  styleUrls: ['./hydrometer-create.component.scss']
 })
 export class HydrometerCreateComponent {
   public title: String = "Registrar Coletas";
@@ -114,6 +115,10 @@ export class HydrometerCreateComponent {
         this.toastrService.danger(`Não foi possivel realizar a ação`, response.error.cause,)
       }
     )
+  }
+
+  public back(){
+    this.router.navigate(['../list'],{relativeTo: this.activatedRoute})
   }
 
 

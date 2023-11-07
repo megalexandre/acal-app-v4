@@ -1,4 +1,5 @@
 import { Address } from "@model/default/address";
+import { Area } from "@model/default/area";
 import { PageFilter } from "@model/default/page-filter";
 import { Reference } from "@model/default/reference";
 
@@ -49,6 +50,7 @@ export interface HydrometerCollect{
 
 export class HydrometerPageFilter extends PageFilter {
   id?: string = null;
+  area?: Area = null;
   addressId: string = null;
   reference: Reference = null;
 

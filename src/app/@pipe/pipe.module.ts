@@ -4,6 +4,7 @@ import { DateTimePipe, IdentificationPipe, ParamPipe, ReasonPipe, ReferencePipe,
 import { CategoryTypePipe } from './category/category-type.pipe';
 import { MonthPipe } from './month/month.pipe';
 import { AddressPipe } from './address/address.pipe';
+import { TooltipHydrometerPipe } from './tooltip-hydrometer/tooltip-hydrometer.pipe';
 
 const PIPES = [
   IdentificationPipe,
@@ -15,6 +16,7 @@ const PIPES = [
   CategoryTypePipe,
   MonthPipe,
   AddressPipe,
+  TooltipHydrometerPipe,
 ];
 
 @NgModule({
@@ -29,6 +31,7 @@ const PIPES = [
   ],
   providers:[
     MonthPipe,
+    ReferencePipe,
   ]
   
 })

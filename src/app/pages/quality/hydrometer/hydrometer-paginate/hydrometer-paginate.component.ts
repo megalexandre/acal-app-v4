@@ -30,9 +30,4 @@ export class HydrometerPaginateComponent extends PaginateComponent implements On
     this.search();
   }
 
-  reset(){
-    this.filter.reset()
-    this.search()
-  }
-
 }
