@@ -131,6 +131,7 @@ export class InvoicePageFilter extends PageFilter {
     reference?: Reference = null;
     value?: number = null;
     dueDate?: string = null;
+    number?: string = null;
     customerName?: string = null;
     addressName?: string = null;
 
@@ -142,6 +143,7 @@ export class InvoicePageFilter extends PageFilter {
       this.customerName = null;
       this.value = null;
       this.dueDate = null;
+      this.number = null;
     }
 }
 

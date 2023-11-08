@@ -10,31 +10,35 @@
       <thead>
         <tr>
 
-          <th class="col-3 align-middle" (click)="order('name')">
+          <th class="align-middle" (click)="order('linkDetail.customer')">
             Nome:
+            <nb-icon *ngIf="filter.sort.field === 'linkDetail.customer' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+            <nb-icon *ngIf="filter.sort.field === 'linkDetail.customer' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
 
-          <th class="col-1 align-middle" (click)="order('name')">
+          <th class="align-middle" (click)="order('name')">
             Número:
+            <nb-icon *ngIf="filter.sort.field === 'linkDetail.customer' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
+            <nb-icon *ngIf="filter.sort.field === 'linkDetail.customer' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
 
-          <th class="col-3 align-middle" (click)="order('name')">
+          <th class="align-middle" (click)="order('name')">
             Endereço:
           </th>
 
-          <th class="col-1 align-middle" (click)="order('name')">
+          <th class="align-middle" (click)="order('reference')">
             Referencia:
           </th>
 
-          <th class="col-2 align-middle" (click)="order('name')">
+          <th class="align-middle" (click)="order('name')">
             Vencimento:
           </th>
 
-          <th class="col-1 align-middle" (click)="order('name')">
+          <th class="align-middle" (click)="order('name')">
             Valor:
           </th>
 
-          <th class="col-1 align-middle" colspan="2">
+          <th class="align-middle" colspan="2">
             <button nbButton outline status="basic" fullWidth (click)="create()">
               <nb-icon icon="plus-outline"></nb-icon>
             </button>
@@ -50,20 +54,23 @@
           </th>
       
           <th>
+            <input type="text" nbInput placeholder="Número:" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.number" />
           </th>
 
           <th>
-            <input type="text" nbInput placeholder="Nome:" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.addressName" />
+            <input type="text" nbInput placeholder="Endereço:" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.addressName" />
           </th>
       
           <th>
-            <app-reference [(ngModel)]="filter.reference" (keydown.enter)="search()" ></app-reference>
+            <app-reference [(ngModel)]="filter.reference" (keydown.enter)="search()"></app-reference>
           </th>
      
           <th>
+            <app-date-reactive [(ngModel)]="filter.dueDate" (keydown.enter)="search()"></app-date-reactive>
           </th>
      
           <th>
+            <input type="text" nbInput placeholder="Valor:" fullWidth (keydown.enter)="search()" [(ngModel)]="filter.addressName" />
           </th>
 
           <th>
@@ -100,7 +107,7 @@
           </td>
           
           <td class="align-middle">
-            {{item.dueDate | date}}
+            {{item.dueDate | date: "dd/MM/yyyy"}}
           </td>
           
           <td class="align-middle">

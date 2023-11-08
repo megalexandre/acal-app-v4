@@ -30,6 +30,7 @@ export interface LinkFilter {
 
 export interface LinkPage {
   id: string,
+  address: Address,
   customerName: String,
   customerDocument: String,
   categoryName: String,

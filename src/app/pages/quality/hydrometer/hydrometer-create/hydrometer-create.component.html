@@ -100,7 +100,7 @@
         </tr>
 
         <tr *ngFor="let hydrometer of proposal.hydrometers" [ngClass]="hydrometer.alreadyExists ? 'table-info' : (hydrometer.selected ? 'table-success' : 'table-ligth')">
-          <td class="align-middle text-center"> {{hydrometer.address.alias}} </td>
+          <td class="align-middle text-center"> {{hydrometer.address | address}} </td>
           
           <td class="align-middle text-center">  
             <input nbInput fullWidth [(ngModel)]="hydrometer.lastCollect.totalMeter" disabled>
