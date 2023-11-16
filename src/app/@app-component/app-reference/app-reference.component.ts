@@ -11,8 +11,8 @@ const months = {  1: "JANUARY", 2: "FEBRUARY", 3: "MARCH",  4: "APRIL",  5: "MAY
   <input
     nbInput
     fullWidth
-    title="referência"
-    placeHolder="referência"
+    title="Referência:"
+    placeHolder="Referência:"
     mask="00/0000"
     [dropSpecialCharacters]="false"
     [(ngModel)]="value"

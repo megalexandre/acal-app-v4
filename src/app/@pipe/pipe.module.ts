@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { DateTimePipe, IdentificationPipe, ParamPipe, ReasonPipe, ReferencePipe, TypePipe } from '.';
 import { CategoryTypePipe } from './category/category-type.pipe';
@@ -32,6 +32,7 @@ const PIPES = [
   providers:[
     MonthPipe,
     ReferencePipe,
+    DecimalPipe,
   ]
   
 })

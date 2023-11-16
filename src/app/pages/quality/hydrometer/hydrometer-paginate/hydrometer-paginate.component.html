@@ -24,6 +24,7 @@
 
           <th class="col-3 align-middle">
             Consumo:
+            <nb-icon icon="question-mark-circle-outline" nbTooltip="Consumo considerado, é diferente do consumo total." nbTooltipStatus="primary" nbButton></nb-icon>
             <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'ASC'" icon="arrow-ios-upward-outline"></nb-icon>
             <nb-icon *ngIf="filter.sort.field === 'name' && filter.sort.direction === 'DESC'" icon="arrow-ios-downward-outline"></nb-icon>
           </th>
@@ -93,7 +94,7 @@
           </td>
 
           <td class="align-middle">
-            <button nbButton outline status="warning" fullWidth (click)="edit(item.id)">
+            <button nbButton outline status="warning" fullWidth (click)="edit(item.id)" disabled>
               <nb-icon icon="edit-2-outline"></nb-icon>
             </button>
           </td>

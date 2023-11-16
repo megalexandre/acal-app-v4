@@ -12,7 +12,7 @@ import { Hydrometer } from '../hydrometer.model/hydrometer';
 })
 export class HydrometerDeleteComponent extends HydrometerComponent implements OnInit  {
 
-  public title = "Deletar Hydrometer"
+  public title = "Deletar Hydromêtro"
   public hydrometer: Hydrometer;
   public id: string;
   public loaded: boolean = false;
@@ -34,7 +34,13 @@ export class HydrometerDeleteComponent extends HydrometerComponent implements On
       super.back()
     }
 
-    this.service.getById(this.id).subscribe()
+    this.service.getById(this.id).subscribe(
+      (hydrometer: Hydrometer)=> {
+        this.hydrometer = hydrometer;
+        this.loaded = true
+
+      }
+    )
   }
 
   override commit(): void {

@@ -11,7 +11,33 @@
 
         <div class="row mb-3">
 
-          <div class="col-12">
+          <div class="col-6">
+            <label for="Area" class="label">Área:</label>
+            <input nbInput fullWidth placeholder="Area:" [(ngModel)]="hydrometer.address.area.name" disabled>
+          </div>
+
+          <div class="col-3">
+            <label for="Número" class="label">Número:</label>
+            <input nbInput fullWidth placeholder="Número:" [(ngModel)]="hydrometer.address.number" disabled>
+          </div>
+
+          <div class="col-3">
+            <label for="Letra" class="label">Letra:</label>
+            <input nbInput fullWidth placeholder="Letra:" [(ngModel)]="hydrometer.address.letter" disabled>
+          </div>
+
+        </div>
+
+        <div class="row mb-3">
+
+          <div class="col-6">
+            <label for="Valor" class="label">Valor:</label>
+            <input nbInput fullWidth placeholder="Valor:" [(ngModel)]="hydrometer.reference.value" disabled>
+          </div>
+
+          <div class="col-6">
+            <label for="Consumo" class="label">Consumo:</label>
+            <input nbInput fullWidth placeholder="Consumo:" [(ngModel)]="hydrometer.consideredConsumption" disabled>
           </div>
 
         </div>

@@ -10,8 +10,8 @@ export interface HydrometerProposal {
 }
 
 export interface HydrometerProposalItem{
-  address: Address,
   selected: boolean,
+  address: Address,
   alreadyExists: boolean,
   actualCollect: HydrometerProposalCollect,
   lastCollect:  HydrometerProposalCollect,
